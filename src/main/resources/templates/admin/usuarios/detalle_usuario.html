@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrupe Lee</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-admin">
+            <img src="/images/logo.png" alt="Arrupe Lee" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-admin"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/informes"
+                  ><i class="fa-solid fa-chart-pie px-1"></i> Informes</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      <div class="text-center mb-3 text-light">
+        <h3 class="fs-2 rowdies-regular mb-3">
+          Detalle de
+          <span
+            th:text="@{${usuario.nombre} + ' ' + ${usuario.apellido}}"
+          ></span>
+        </h3>
+        <div class="fst-italic fs-6">
+          Observa los detalles del usuario seleccionado.
+        </div>
+      </div>
+      <div class="mx-3">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <b>Nombres: </b><span th:text="${usuario.nombre}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>N° Carné: </b><span th:text="${usuario.carnet}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Contraseña: </b><span th:text="${usuario.contrasena}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Estado: </b><span th:text="${usuario.estado}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Grado: </b><span th:text="${usuario.gradoNombre}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Nivel Educativo: </b
+                ><span th:text="${usuario.nivelEducativoNombre}"></span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <b>Apellidos: </b><span th:text="${usuario.apellido}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Correo: </b><span th:text="${usuario.correo}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Número de Teléfono: </b
+                ><span th:text="${usuario.numero}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Rol: </b><span th:text="${usuario.rolNombre}"></span>
+              </li>
+              <li class="list-group-item">
+                <b>Sección: </b><span th:text="${usuario.seccionNombre}"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

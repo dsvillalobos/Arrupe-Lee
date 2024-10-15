@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrupe Lee</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      document.addEventListener("DOMContentLoaded", function () {
+        sessionStorage.setItem("ID", encodeURIComponent(/*[[${ID}]]*/));
+        sessionStorage.setItem("correo", encodeURIComponent(/*[[${correo}]]*/));
+        sessionStorage.setItem("carnet", encodeURIComponent(/*[[${carnet}]]*/));
+      });
+      /*]]>*/
+    </script>
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-estudiante">
+            <img src="/images/logo.png" alt="Arrupe Lee" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-estudiante"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/certificados"
+                  ><i class="fa-solid fa-medal px-1"></i> Certificados</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      <div class="welcome-text-container text-light text-center fs-6 mb-4">
+        <div>Bienvenido <b th:text="${usuario}"></b>.</div>
+        <div class="small fst-italic">¡Comienza tu aventura lectora!</div>
+      </div>
+      <div class="row niveles-container">
+        <div class="col">
+          <a href="/lecciones-literal"
+            ><img src="/images/nivelLiteral.png" alt=""
+          /></a>
+        </div>
+        <div class="col">
+          <a href="/lecciones-inferencial"
+            ><img src="/images/nivelInferencial.png" alt=""
+          /></a>
+        </div>
+        <div class="col">
+          <a href="/lecciones-critico"
+            ><img src="/images/nivelCritico.png" alt=""
+          /></a>
+        </div>
+      </div>
+      <div class="bitacora-container">
+        <div class="card bg-dark border-0">
+          <h5
+            class="card-title text-center py-3 rowdies-regular fs-4 text-light"
+          >
+            Mi bitácora de vuelo
+          </h5>
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="text-light" style="width: 150px">Nivel Literal</span>
+              <div
+                class="progress w-100"
+                role="progressbar"
+                aria-label="Nivel Literal"
+                th:aria-valuenow="${promedioLiteral}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div
+                  class="progress-bar bg-literal"
+                  th:style="'width: ' + ${promedioLiteral} + '%'"
+                ></div>
+              </div>
+              <span
+                class="text-light"
+                th:text="${#numbers.formatDecimal(promedioLiteral, 1, 0) + '%'}"
+                >0%</span
+              >
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="text-light" style="width: 150px"
+                >Nivel Inferencial</span
+              >
+              <div
+                class="progress w-100"
+                role="progressbar"
+                aria-label="Nivel Inferencial"
+                th:aria-valuenow="${promedioInferencial}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div
+                  class="progress-bar bg-inferencial text-light"
+                  th:style="'width: ' + ${promedioInferencial} + '%'"
+                ></div>
+              </div>
+              <span
+                class="text-light"
+                th:text="${#numbers.formatDecimal(promedioInferencial, 1, 0) + '%'}"
+                >0%</span
+              >
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="text-light" style="width: 150px">Nivel Crítico</span>
+              <div
+                class="progress w-100"
+                role="progressbar"
+                aria-label="Nivel Crítico"
+                th:aria-valuenow="${promedioCritico}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div
+                  class="progress-bar bg-critico text-light"
+                  th:style="'width: ' + ${promedioCritico} + '%'"
+                ></div>
+              </div>
+              <span
+                class="text-light"
+                th:text="${#numbers.formatDecimal(promedioCritico, 1, 0) + '%'}"
+                >0%</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrupe Lee</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-estudiante">
+            <img src="/images/logo.png" alt="Arrupe Lee" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-estudiante"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/certificados"
+                  ><i class="fa-solid fa-medal px-1"></i> Certificados</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      <div class="text-center mb-3 text-light">
+        <h3 class="fs-2 rowdies-regular mb-3">Certificados</h3>
+        <div class="fst-italic fs-6">
+          Obten certificados luego de completar algún nivel literario.
+        </div>
+      </div>
+      <div class="text-center text-light mb-3 small">
+        Basado en tu bitácora de vuelo, has conseguido los siguientes
+        certificados.
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-3" th:if="${promedioLiteral == 100.0}">
+          <div class="card bg-dark text-light">
+            <div class="text-center">
+              <img src="/images/nivelLiteral.png" class="card-img-top" alt="" />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center mb-3">
+                Certificado - Nivel Literal
+              </h5>
+              <p class="card-text small mb-3">
+                Tras haber completado todas las lecciones del Nivel Literal has
+                obtenido un reconocimiento.
+              </p>
+              <div class="d-grid gap-2">
+                <a
+                  class="btn btn-primary btn-sm"
+                  target="_blank"
+                  href="/certificado/1"
+                  ><i class="fa-solid fa-medal px-1"></i> Obtener Certificado</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3" th:if="${promedioInferencial == 100.0}">
+          <div class="card bg-dark text-light">
+            <div class="text-center">
+              <img
+                src="/images/nivelInferencial.png"
+                class="card-img-top"
+                alt=""
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center mb-3">
+                Certificado - Nivel Inferencial
+              </h5>
+              <p class="card-text small mb-3">
+                Tras haber completado todas las lecciones del Nivel Inferencial
+                has obtenido un reconocimiento.
+              </p>
+              <div class="d-grid gap-2">
+                <a
+                  class="btn btn-primary btn-sm"
+                  target="_blank"
+                  href="/certificado/2"
+                  ><i class="fa-solid fa-medal px-1"></i> Obtener Certificado</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3" th:if="${promedioCritico == 100.0}">
+          <div class="card bg-dark text-light">
+            <div class="text-center">
+              <img src="/images/nivelCritico.png" class="card-img-top" alt="" />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center mb-3">
+                Certificado - Nivel Crítico
+              </h5>
+              <p class="card-text small mb-3">
+                Tras haber completado todas las lecciones del Nivel Crítico has
+                obtenido un reconocimiento.
+              </p>
+              <div class="d-grid gap-2">
+                <a
+                  class="btn btn-primary btn-sm"
+                  target="_blank"
+                  href="/certificado/3"
+                  ><i class="fa-solid fa-medal px-1"></i> Obtener Certificado</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap");
+
+body {
+  margin: 0px !important;
+  background-image: url(/images/bg.png);
+}
+
+.navbar img {
+  width: 225px !important;
+}
+
+.video-container {
+  width: 100% !important;
+}
+
+.video-container video {
+  width: 100% !important;
+}
+
+.rowdies-light {
+  font-family: "Rowdies", sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+}
+
+.rowdies-regular {
+  font-family: "Rowdies", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+.rowdies-bold {
+  font-family: "Rowdies", sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+.niveles-container .col img {
+  width: 100% !important;
+}
+
+.niveles-container .col img:hover {
+  width: 105% !important;
+  transition: 0.75s !important;
+}
+
+.bg-literal {
+  background-color: #f8733f !important;
+}
+
+.bg-inferencial {
+  background-color: #27954d !important;
+}
+
+.bg-critico {
+  background-color: #c80506 !important;
+}
+
+.progress {
+  height: 20px !important;
+}
+
+.bg-dark-bitacora {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.btn-primary {
+  background-color: #ffcc4d !important;
+  border: 1px solid #ffcc4d !important;
+}
+
+.btn-secondary {
+  background-color: #f8733f !important;
+  border: 1px solid #f8733f !important;
+}
+
+.ingreso-form-container,
+.card {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+th {
+  background-color: #200533 !important;
+  border: 1px solid white !important;
+  color: white !important;
+}
+
+td,
+input,
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid white !important;
+  color: white !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+::placeholder {
+  color: white !important;
+}
+
+hr {
+  height: 3.5px !important;
+  border: none !important;
+  background-color: #fff !important;
+  border-radius: 3px !important;
+}
+
+.tarjetas-admin-container .card {
+  height: 180px !important;
+}
+
+.ingreso-form-images-container img {
+  width: 275px !important;
+  height: 275px !important;
+}
+
+.bg-dark {
+  background-color: #200533 !important;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #200533;
+}
+
+select option {
+  background-color: #200533 !important;
+  color: white !important;
+}
+
+.leccion-carousel .carousel-inner {
+  text-align: center !important;
+}
+
+.leccion-carousel img {
+  display: inline-block !important;
+  width: 70% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 7.5px;
+}
+
+.lecciones-card img {
+  width: 70px !important;
+  height: auto !important;
+}
+
+.certificados-card img {
+  width: auto !important;
+  height: 250px !important;
+}
+
+.certificado-container {
+  padding: 5% 10% 5% 10% !important;
+}
+
+.logo-certificado-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.logo-certificado-container img {
+  max-height: 170px !important;
+}
+
+.certificado-imagen-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.certificado-imagen-container img {
+  vertical-align: middle !important;
+  margin-right: 80px !important;
+}
