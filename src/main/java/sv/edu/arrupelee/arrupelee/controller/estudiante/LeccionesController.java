@@ -17,6 +17,8 @@ import sv.edu.arrupelee.arrupelee.model.admin.NivelEducativo;
 import sv.edu.arrupelee.arrupelee.repositories.admin.NivelEducativoRepository;
 import sv.edu.arrupelee.arrupelee.model.estudiante.ProgresoEstudiante;
 import sv.edu.arrupelee.arrupelee.repositories.estudiante.ProgresoEstudianteRepository;
+import sv.edu.arrupelee.arrupelee.model.estudiante.LeccionesPruebas;
+import sv.edu.arrupelee.arrupelee.repositories.estudiante.LeccionesPruebasRepository;
 
 @Controller
 @SessionAttributes({"usuario", "ID", "correo", "carnet", "nivelEducativo", "promedioLiteral", "promedioInferencial", "promedioCritico"})
@@ -30,6 +32,9 @@ public class LeccionesController {
 
     @Autowired
     ProgresoEstudianteRepository progresoEstudianteRepository;
+    
+    @Autowired
+    LeccionesPruebasRepository leccionesPruebasRepository;
 
     // Navegacion para acceder al portal del estudiante (Desde donde se cargaran las lecciones)
     @RequestMapping("/portal-estudiante")
@@ -239,6 +244,14 @@ public class LeccionesController {
         }
 
         return ResponseEntity.ok("Progreso guardado exitosamente");
+    }
+    
+    // Ruta para ir a la vista de las pruebas
+    @RequestMapping("/prueba/{idLeccion}")
+    public String prueba(Model model, @PathVariable Long idLeccion) {
+        LeccionesPruebas leccionesPruebas = leccionesPruebasRepository.findByIdLeccion(idLeccion);
+        model.addAttribute("idPrueba", leccionesPruebas.getIdPrueba());
+        return "estudiante/pruebas/vista_prueba";
     }
 
 }

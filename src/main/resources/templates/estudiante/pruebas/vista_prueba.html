@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrupe Lee</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-estudiante">
+            <img src="/images/logo.png" alt="Arrupe Lee" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-estudiante"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/certificados"
+                  ><i class="fa-solid fa-medal px-1"></i> Certificados</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      <div class="text-center mb-3 text-light">
+        <h3 id="pruebaNombre" class="fs-2 rowdies-regular mb-3"></h3>
+      </div>
+      <div class="mx-3">
+        <form id="testForm" class="mt-4">
+          <!-- Donde iran las preguntas y respuestas -->
+        </form>
+        <div id="results" class="mt-4 text-light">
+          <!-- Donde estaran los resultados -->
+        </div>
+      </div>
+    </main>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      var idPrueba = /*[[${idPrueba}]]*/ null;
+      /*]]>*/
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const pruebaNombreElement = document.getElementById("pruebaNombre");
+        const testForm = document.getElementById("testForm");
+        const resultsDiv = document.getElementById("results");
+        let allAnswers = [];
+
+        // Fetch las pruebas
+        fetch("http://localhost:8085/arrupe/sv/arrupe/prueba")
+          .then((response) => response.json())
+          .then((data) => {
+            const matchingPrueba = data.find(
+              (prueba) => prueba[0] === idPrueba
+            );
+
+            if (matchingPrueba) {
+              console.log("Matching Prueba:", matchingPrueba);
+              pruebaNombreElement.textContent = matchingPrueba[1];
+            } else {
+              console.log("No matching prueba found for idPrueba:", idPrueba);
+            }
+
+            // Luego hacerle fetch a las preguntas
+            return fetch("http://localhost:8085/arrupe/sv/arrupe/preguntas");
+          })
+          .then((response) => response.json())
+          .then((questions) => {
+            const matchingQuestions = questions.filter(
+              (question) => question[3] === idPrueba
+            );
+
+            if (matchingQuestions.length > 0) {
+              console.log("Matching Questions:", matchingQuestions);
+              // Luego hacer fetch de las respuestas
+              return fetch("http://localhost:8085/arrupe/sv/arrupe/respuestas")
+                .then((response) => response.json())
+                .then((answers) => {
+                  allAnswers = answers;
+                  displayQuestionsAndAnswers(matchingQuestions, answers);
+                });
+            } else {
+              console.log(
+                "No matching questions found for idPrueba:",
+                idPrueba
+              );
+              testForm.innerHTML =
+                '<p class="text-light">No se encontraron preguntas para esta prueba.</p>';
+              return Promise.reject("No matching questions");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            testForm.innerHTML =
+              '<p class="text-light">Error al cargar las preguntas. Por favor, intente más tarde.</p>';
+          });
+
+        function displayQuestionsAndAnswers(questions, allAnswers) {
+          questions.forEach((question, index) => {
+            const questionCard = document.createElement("div");
+            questionCard.className = "card bg-dark mb-4";
+            const cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+
+            const questionText = `
+            <p class="text-light mb-2 fs-5 fw-bold">${question[1]}</p>
+            ${
+              question[2]
+                ? `<img src="${question[2]}" alt="Recurso para pregunta ${
+                    index + 1
+                  }" class="img-fluid mb-2">`
+                : ""
+            }
+          `;
+
+            const answers = allAnswers.filter(
+              (answer) => answer[2] === question[0]
+            );
+            const answersHtml = answers
+              .map(
+                (answer) => `
+            <div class="form-check py-2">
+              <input class="form-check-input" type="radio" name="question_${question[0]}" id="answer_${answer[0]}" value="${answer[0]}">
+              <label class="form-check-label text-light" for="answer_${answer[0]}">
+                ${answer[1]}
+              </label>
+            </div>
+          `
+              )
+              .join("");
+
+            cardBody.innerHTML = questionText + answersHtml;
+            questionCard.appendChild(cardBody);
+            testForm.appendChild(questionCard);
+          });
+
+          // Agregar un boton de submit dentro de un div
+          const buttonDiv = document.createElement("div");
+          buttonDiv.className = "mb-3 d-grid gap-2";
+          const submitButton = document.createElement("button");
+          submitButton.type = "submit";
+          submitButton.className = "btn btn-primary mt-3 btn-sm";
+          submitButton.textContent = "Terminar Prueba";
+          buttonDiv.appendChild(submitButton);
+          testForm.appendChild(buttonDiv);
+
+          // Ponerle un eventListener al boton de enviar
+          testForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(testForm);
+            const answers = Object.fromEntries(formData);
+            console.log("Submitted answers:", answers);
+            checkAnswers(answers);
+          });
+        }
+
+        function checkAnswers(submittedAnswers) {
+          let score = 0;
+          const totalQuestions = Object.keys(submittedAnswers).length;
+          let resultsHtml = "<h6 class='text-center'>Resultados</h6>";
+
+          for (const [questionId, answerId] of Object.entries(
+            submittedAnswers
+          )) {
+            const question = allAnswers.find(
+              (a) => a[2] === parseInt(questionId.split("_")[1])
+            );
+            const selectedAnswer = allAnswers.find(
+              (a) => a[0] === parseInt(answerId)
+            );
+            const correctAnswer = allAnswers.find(
+              (a) =>
+                a[2] === parseInt(questionId.split("_")[1]) && a[4] === true
+            );
+
+            if (selectedAnswer[4]) {
+              score++;
+            }
+          }
+
+          // Mostrar la puntuacion final
+          resultsHtml += `<div class='text-center'>Puntuación final: ${score} de ${totalQuestions}</div>`;
+          resultsDiv.innerHTML = resultsHtml;
+
+          // Desabilitar el boton luego de enviar las respuestas
+          testForm.querySelector('button[type="submit"]').disabled = true;
+        }
+      });
+    </script>
+  </body>
+</html>
