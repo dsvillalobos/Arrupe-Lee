@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrupe Lee</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-admin">
+            <img src="/images/logo.png" alt="Arrupe Lee" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-admin"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/informes"
+                  ><i class="fa-solid fa-chart-pie px-1"></i> Informes</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      <div class="text-center mb-3 text-light">
+        <h3 class="fs-2 rowdies-regular mb-3">Agregar Prueba</h3>
+      </div>
+      <form class="mx-3 text-light" id="preguntasForm" autocomplete="off">
+        <!-- Contenedor para las preguntas -->
+        <div id="preguntasContainer">
+          <div class="mb-3">
+            <label for="nombrePrueba" class="form-label"
+              >Nombre de la Prueba:</label
+            >
+            <input
+              type="text"
+              name="nombrePrueba"
+              id="nombrePrueba"
+              class="form-control"
+              required
+              placeholder="Agrega el nombre de la prueba"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="nivelEducativoPrueba" class="form-label"
+              >Nivel Educativo de la Prueba:</label
+            >
+            <select
+              name="nivelEducativoPrueba"
+              id="nivelEducativoPrueba"
+              required
+              class="form-control"
+            >
+              <option
+                th:each="nivel : ${niveles}"
+                th:value="${nivel.id}"
+                th:text="${nivel.nombre}"
+              ></option>
+            </select>
+          </div>
+          <!-- Bloque con la primera pregunta -->
+          <div class="pregunta-block">
+            <div class="mb-3">
+              <label for="pregunta1" class="form-label">Pregunta N° 1:</label>
+              <input
+                type="text"
+                name="pregunta1"
+                id="pregunta1"
+                class="form-control"
+                required
+                placeholder="Agrega el texto de la pregunta N° 1"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                name="respuestaPregunta1_1"
+                id="respuestaPregunta1_1"
+                class="form-control mx-4"
+                required
+                placeholder="Respuesta N° 1"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                name="respuestaPregunta1_2"
+                id="respuestaPregunta1_2"
+                class="form-control mx-4"
+                required
+                placeholder="Respuesta N° 2"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                name="respuestaPregunta1_3"
+                id="respuestaPregunta1_3"
+                class="form-control mx-4"
+                required
+                placeholder="Respuesta N° 3"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                name="respuestaPregunta1_4"
+                id="respuestaPregunta1_4"
+                class="form-control mx-4"
+                required
+                placeholder="Respuesta N° 4"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="respuestaCorrectaPregunta1" class="form-label"
+                >La Respuesta Correcta es:</label
+              >
+              <select
+                name="respuestaCorrectaPregunta1"
+                id="respuestaCorrectaPregunta1"
+                class="form-control"
+              >
+                <option value="1">Respuesta N° 1</option>
+                <option value="2">Respuesta N° 2</option>
+                <option value="3">Respuesta N° 3</option>
+                <option value="4">Respuesta N° 4</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="d-grid gap-2">
+              <button
+                type="button"
+                id="agregarPruebaBtn"
+                class="btn btn-primary text-dark rounded-pill btn-sm"
+              >
+                Agregar Prueba
+              </button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-grid gap-2">
+              <button
+                type="button"
+                id="agregarPreguntaBtn"
+                class="btn btn-primary text-dark rounded-pill btn-sm"
+              >
+                Agregar otra Pregunta
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+        <div class="mb-3">
+          <a class="text-light" href="/roles">Regresar</a>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      // let idLeccion = document.getElementById("leccionPrueba").value;
+      let preguntaCounter = 1;
+      let idPrueba = null;
+
+      // Agregar más preguntas
+      document
+        .getElementById("agregarPreguntaBtn")
+        .addEventListener("click", function () {
+          preguntaCounter++;
+
+          const preguntasContainer =
+            document.getElementById("preguntasContainer");
+          const newPreguntaBlock = document.createElement("div");
+          newPreguntaBlock.classList.add("pregunta-block");
+
+          newPreguntaBlock.innerHTML = `
+              <div class="mb-3">
+                <label for="pregunta${preguntaCounter}" class="form-label">Pregunta N° ${preguntaCounter}:</label>
+                <input
+                  type="text"
+                  name="pregunta${preguntaCounter}"
+                  id="pregunta${preguntaCounter}"
+                  class="form-control"
+                  required
+                  placeholder="Agrega el texto de la pregunta N° ${preguntaCounter}"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="respuestaPregunta${preguntaCounter}_1"
+                  id="respuestaPregunta${preguntaCounter}_1"
+                  class="form-control mx-4"
+                  required
+                  placeholder="Respuesta N° 1"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="respuestaPregunta${preguntaCounter}_2"
+                  id="respuestaPregunta${preguntaCounter}_2"
+                  class="form-control mx-4"
+                  required
+                  placeholder="Respuesta N° 2"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="respuestaPregunta${preguntaCounter}_3"
+                  id="respuestaPregunta${preguntaCounter}_3"
+                  class="form-control mx-4"
+                  required
+                  placeholder="Respuesta N° 3"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="respuestaPregunta${preguntaCounter}_4"
+                  id="respuestaPregunta${preguntaCounter}_4"
+                  class="form-control mx-4"
+                  required
+                  placeholder="Respuesta N° 4"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="respuestaCorrectaPregunta${preguntaCounter}" class="form-label">La Respuesta Correcta es:</label>
+                <select
+                  name="respuestaCorrectaPregunta${preguntaCounter}"
+                  id="respuestaCorrectaPregunta${preguntaCounter}"
+                  class="form-control"
+                >
+                  <option value="1">Respuesta N° 1</option>
+                  <option value="2">Respuesta N° 2</option>
+                  <option value="3">Respuesta N° 3</option>
+                  <option value="4">Respuesta N° 4</option>
+                </select>
+              </div>
+              <hr />
+            `;
+
+          preguntasContainer.appendChild(newPreguntaBlock);
+        });
+
+      // Agregar prueba
+      document
+        .getElementById("agregarPruebaBtn")
+        .addEventListener("click", async function () {
+          const nombrePrueba = document.getElementById("nombrePrueba").value;
+          const idNivel = document.getElementById("nivelEducativoPrueba").value;
+          const estado = "HABILITADO";
+
+          const pruebaData = {
+            nombre: nombrePrueba,
+            idNivel: parseInt(idNivel),
+            estado: estado,
+          };
+
+          try {
+            // POST to add the Prueba
+            const pruebaResponse = await fetch(
+              "http://localhost:8085/arrupe/sv/arrupe/prueba/agregar",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(pruebaData),
+              }
+            );
+
+            const pruebaResult = await pruebaResponse.json();
+
+            // GET the last Prueba ID
+            const pruebasResponse = await fetch(
+              "http://localhost:8085/arrupe/sv/arrupe/prueba"
+            );
+            const pruebasData = await pruebasResponse.json();
+            const lastPrueba = pruebasData[pruebasData.length - 1];
+            const idPrueba = lastPrueba[0];
+
+            console.log("Última Prueba ID:", idPrueba);
+
+            // Function to post each pregunta sequentially
+            for (let i = 1; i <= preguntaCounter; i++) {
+              const nombrePregunta = document.getElementById(
+                `pregunta${i}`
+              ).value;
+
+              const preguntaData = {
+                nombre: nombrePregunta,
+                recurso: "",
+                prueba: idPrueba,
+              };
+
+              const preguntaResponse = await fetch(
+                "http://localhost:8085/arrupe/sv/arrupe/preguntas/agregar",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(preguntaData),
+                }
+              );
+
+              if (!preguntaResponse.ok) {
+                throw new Error(`Error al agregar la pregunta N°${i}`);
+              }
+
+              console.log(`Pregunta N°${i} agregada exitosamente`);
+
+              // GET preguntas and get the last added pregunta
+              const preguntasResponse = await fetch(
+                "http://localhost:8085/arrupe/sv/arrupe/preguntas"
+              );
+              const preguntasData = await preguntasResponse.json();
+              const lastPregunta = preguntasData[preguntasData.length - 1];
+              const idPregunta = lastPregunta[0];
+
+              console.log(`Última Pregunta ID: ${idPregunta}`);
+
+              // Get the correct answer for this question
+              const correctAnswer = document.getElementById(
+                `respuestaCorrectaPregunta${i}`
+              ).value;
+
+              // Add responses for each question
+              for (let j = 1; j <= 4; j++) {
+                const respuesta = document.getElementById(
+                  `respuestaPregunta${i}_${j}`
+                ).value;
+                const buenaMala = j.toString() === correctAnswer;
+
+                const respuestaData = {
+                  respuesta: respuesta,
+                  idPregunta: idPregunta,
+                  buenaMala: buenaMala,
+                };
+
+                const respuestaResponse = await fetch(
+                  "http://localhost:8085/arrupe/sv/arrupe/respuestas/agregar",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(respuestaData),
+                  }
+                );
+
+                if (!respuestaResponse.ok) {
+                  throw new Error(
+                    `Error al agregar la respuesta N°${j} para la pregunta N°${i}`
+                  );
+                }
+
+                console.log(
+                  `Respuesta N°${j} para la pregunta N°${i} agregada exitosamente`
+                );
+              }
+            }
+
+            window.location.href = `/pruebas-admin`;
+          } catch (error) {
+            console.error("Error:", error);
+            alert("Hubo un error al agregar la prueba, preguntas o respuestas");
+          }
+        });
+    </script>
+  </body>
+</html>
