@@ -221,8 +221,14 @@ public class LeccionesController {
         model.addAttribute("leccion", leccion);
         
         // Mandar a la vista el id de la prueba vinculado a la leccion
+        // Verificar si es nulo, es decir, que no haya una prueba viculada a la leccion
         LeccionesPruebas leccionesPruebas = leccionesPruebasRepository.findByIdLeccion(id);
-        model.addAttribute("idPrueba_leccion", leccionesPruebas.getIdPrueba());
+        
+        if (leccionesPruebas == null) {
+            model.addAttribute("idPrueba_leccion", null);
+        } else {
+            model.addAttribute("idPrueba_leccion", leccionesPruebas.getIdPrueba());
+        }
 
         return "estudiante/lecciones/vista_leccion";
     }
