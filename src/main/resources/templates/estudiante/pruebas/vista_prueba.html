@@ -82,6 +82,7 @@
     <script th:inline="javascript">
       /*<![CDATA[*/
       var idPrueba = /*[[${idPrueba}]]*/ null;
+      var idUsuario = /*[[${ID}]]*/ null;
       /*]]>*/
     </script>
 
@@ -230,6 +231,30 @@
 
           // Desabilitar el boton luego de enviar las respuestas
           testForm.querySelector('button[type="submit"]').disabled = true;
+
+          // Hacer el cuerpo de la solicitud POST para guardar el resultado de la prueba
+          const raw = JSON.stringify({
+            prueba: idPrueba,
+            usuario: idUsuario,
+            puntaje: (score / totalQuestions) * 10,
+          });
+
+          const requestOptions = {
+            method: "POST",
+            body: raw,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+          };
+
+          fetch(
+            "http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba/agregar",
+            requestOptions
+          )
+            .then((response) => response.text())
+            .then((result) => console.log("Se ha guardado exitosamente"))
+            .catch((error) => console.log("error", error));
         }
       });
     </script>

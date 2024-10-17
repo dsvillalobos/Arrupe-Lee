@@ -219,6 +219,10 @@ public class LeccionesController {
 
         // Mandar la leccion a la vista
         model.addAttribute("leccion", leccion);
+        
+        // Mandar a la vista el id de la prueba vinculado a la leccion
+        LeccionesPruebas leccionesPruebas = leccionesPruebasRepository.findByIdLeccion(id);
+        model.addAttribute("idPrueba_leccion", leccionesPruebas.getIdPrueba());
 
         return "estudiante/lecciones/vista_leccion";
     }
