@@ -28,13 +28,16 @@ public class AuthController {
                 model.addAttribute("carnet", usuario.getCarnet());
                 // Mandar el ID del nivel educativo (para el estudiante)
                 model.addAttribute("nivelEducativo", usuario.getIdNivelEducativo());
-                
+
                 // Verificar el Rol
-                if (usuario.getIdRol() == 1) { // Estudiante
+                if (usuario.getIdRol() == 1) {
+                    // Estudiante
                     return "redirect:/portal-estudiante";
-                } else if (usuario.getIdRol() == 2) { // Docente
-                    return "redirect:/auth-error";
-                } else if (usuario.getIdRol() == 3) { // Admin
+                } else if (usuario.getIdRol() == 2) {
+                    // Docente
+                    return "redirect:/portal-docente";
+                } else if (usuario.getIdRol() == 3) {
+                    // Admin
                     return "forward:/portal-admin";
                 } else {
                     return "redirect:/auth-error";

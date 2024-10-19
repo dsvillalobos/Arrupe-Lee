@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planeta Arrupe</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-docente">
+            <img src="/images/logo.png" alt="Planeta Arrupe" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-docente"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mt-4">
+      <div class="text-center mb-3 text-light">
+        <h3 class="fs-2 rowdies-regular mb-3">Agregar Lección</h3>
+      </div>
+      <form
+        id="leccionForm"
+        action="/guardar-leccion-docente"
+        class="mx-3 text-light"
+        autocomplete="off"
+      >
+        <h5 class="my-2">1. Sube las imagenes de la lección.</h5>
+        <div class="mb-3 ms-5">
+          <label for="imageCount" class="form-label">Número de Imágenes:</label>
+          <input type="number" id="imageCount" class="form-control" min="2" />
+        </div>
+        <!-- Contenedor para las imagenes -->
+        <div id="imageInputsContainer" class="mb-3 ms-5"></div>
+        <div class="mb-3 d-grid gap-2">
+          <button
+            type="button"
+            class="btn btn-primary text-dark rounded-pill btn-sm ms-3"
+            id="guardarBtn"
+          >
+            Subir Imágenes
+          </button>
+        </div>
+        <!-- Alerta -->
+        <div class="mb-3 ms-5" id="alertPlaceholder"></div>
+        <div class="my-0">
+          <input
+            type="hidden"
+            id="imagenes"
+            name="imagenes"
+            class="form-control"
+          />
+        </div>
+        <hr />
+        <!-- Verdadero de Formulario -->
+        <h5 class="my-2">2. Ajusta los últimos detalles de la lección.</h5>
+        <div class="mb-3 ms-5">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="form-control"
+            placeholder="Agrega el nombre de la lección"
+          />
+        </div>
+        <div class="mb-3 ms-5">
+          <label for="nivelLiterario" class="form-label"
+            >Nivel Literario:</label
+          >
+          <select
+            name="nivelLiterario"
+            id="nivelLiterario"
+            class="form-control"
+          >
+            <option value="LITERAL">LITERAL</option>
+            <option value="INFERENCIAL">INFERENCIAL</option>
+            <option value="CRITICO">CRITICO</option>
+          </select>
+        </div>
+        <div class="mb-3 ms-5">
+          <label for="idNivelEducativo" class="form-label"
+            >Nivel Educativo:</label
+          >
+          <select
+            name="idNivelEducativo"
+            id="idNivelEducativo"
+            class="form-control"
+            required
+          >
+            <option
+              th:each="nivel : ${niveles}"
+              th:value="${nivel.id}"
+              th:text="${nivel.nombre}"
+            ></option>
+            >
+          </select>
+        </div>
+        <div class="mb-3 ms-5">
+          <label for="nivelLiterario" class="form-label">Estado:</label>
+          <select name="estado" id="estado" class="form-control">
+            <option value="HABILITADO">HABILITADO</option>
+            <option value="DESHABILITADO">DESHABILITADO</option>
+          </select>
+        </div>
+        <div class="mb-3 d-grid gap-2">
+          <button class="btn btn-primary text-dark rounded-pill btn-sm">
+            Guardar
+          </button>
+        </div>
+        <hr />
+        <div class="mb-3">
+          <a class="text-light" href="/lecciones-docente">Regresar</a>
+        </div>
+      </form>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const imageCountInput = document.getElementById("imageCount");
+        const imageInputsContainer = document.getElementById(
+          "imageInputsContainer"
+        );
+        const guardarBtn = document.getElementById("guardarBtn");
+        const imagenesInput = document.getElementById("imagenes");
+        const alertPlaceholder = document.getElementById("alertPlaceholder");
+
+        imageCountInput.addEventListener("input", function () {
+          const count = parseInt(imageCountInput.value, 10);
+          imageInputsContainer.innerHTML = "";
+          for (let i = 0; i < count; i++) {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.name = "file";
+            input.className = "form-control mb-2";
+            imageInputsContainer.appendChild(input);
+          }
+        });
+
+        guardarBtn.addEventListener("click", function () {
+          const fileInputs =
+            imageInputsContainer.querySelectorAll("input[type='file']");
+          let urls = [];
+
+          const uploadFile = (input, index) => {
+            return new Promise((resolve, reject) => {
+              if (input.files.length > 0) {
+                const formdata = new FormData();
+                formdata.append("file", input.files[0]);
+                const requestOptions = {
+                  method: "POST",
+                  body: formdata,
+                  redirect: "follow",
+                };
+                fetch(
+                  "http://localhost:8085/arrupe/sv/arrupe/upload",
+                  requestOptions
+                )
+                  .then((response) => response.text())
+                  .then((result) => {
+                    console.log(result);
+                    urls[index] = result;
+                    resolve();
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                    reject(error);
+                  });
+              } else {
+                resolve();
+              }
+            });
+          };
+
+          Promise.all(
+            Array.from(fileInputs).map((input, index) =>
+              uploadFile(input, index)
+            )
+          )
+            .then(() => {
+              const urlsString = urls.join(",");
+              console.log(urlsString);
+              imagenesInput.value = urlsString;
+              alertPlaceholder.innerHTML = `
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  Imágenes subidas con éxito.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              `;
+            })
+            .catch((error) => console.error("Error uploading files:", error));
+        });
+      });
+    </script>
+  </body>
+</html>

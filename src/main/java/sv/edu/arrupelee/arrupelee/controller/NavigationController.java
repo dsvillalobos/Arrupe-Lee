@@ -24,4 +24,9 @@ public class NavigationController {
         return "admin/admin_portal";
     }
     
+    @RequestMapping("/portal-docente")
+    public String portalDocente(Model model) {
+        return "docente/docente_portal";
+    }
+    
 }
