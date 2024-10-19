@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planeta Arrupe</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body class="mb-4">
+    <!-- Header -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/portal-admin">
+            <img src="/images/logo.png" alt="Planeta Arrupe" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/portal-admin"
+                  ><i class="fa-solid fa-house px-1"></i> Inicio</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/informes"
+                  ><i class="fa-solid fa-chart-pie px-1"></i> Informes</a
+                >
+              </li>
+              <li class="nav-item mx-1">
+                <a class="nav-link text-light" href="/"
+                  ><i class="fa-solid fa-right-from-bracket px-1"></i> Cerrar
+                  Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mt-4">
+      <div class="text-center mb-3 text-light">
+        <h3 class="fs-2 rowdies-regular mb-3">Buscar Usuario</h3>
+      </div>
+      <form id="searchForm" class="mx-3 text-light" autocomplete="off">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombres:</label>
+              <input
+                type="text"
+                name="nombre"
+                id="nombre"
+                placeholder="Ingresa un nombre"
+                class="form-control"
+                maxlength="255"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="carnet" class="form-label">N° Carné:</label>
+              <input
+                type="text"
+                name="carnet"
+                id="carnet"
+                placeholder="Ingresa un número de carné"
+                class="form-control"
+                maxlength="255"
+                pattern="^[A-Z]{2}\d{6}$"
+                title="El número de carné sigue el siguiente formato: XX123456"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="estado" class="form-label">Estado:</label>
+              <select name="estado" id="estado" class="form-control">
+                <option value="" selected>Selecciona un estado</option>
+                <option value="HABILITADO">HABILITADO</option>
+                <option value="DESHABILITADO">DESHABILITADO</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="idGrado" class="form-label">Grado:</label>
+              <select name="idGrado" id="idGrado" class="form-control">
+                <option value="" selected>Selecciona un grado</option>
+                <option
+                  th:each="grado : ${grados}"
+                  th:value="${grado.id}"
+                  th:text="${grado.descripcion}"
+                ></option>
+                >
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido:</label>
+              <input
+                type="text"
+                name="apellido"
+                id="apellido"
+                placeholder="Ingresa un apellido"
+                class="form-control"
+                maxlength="255"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="idRol" class="form-label">Rol:</label>
+              <select name="idRol" id="idRol" class="form-control">
+                <option value="" selected>Selecciona un rol</option>
+                <option
+                  th:each="rol : ${roles}"
+                  th:value="${rol.id}"
+                  th:text="${rol.descripcion}"
+                ></option>
+                >
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="idSeccion" class="form-label">Sección:</label>
+              <select name="idSeccion" id="idSeccion" class="form-control">
+                <option value="" selected>Selecciona una sección</option>
+                <option
+                  th:each="seccion : ${secciones}"
+                  th:value="${seccion.id}"
+                  th:text="${seccion.nombre}"
+                ></option>
+                >
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="idNivelEducativo" class="form-label"
+                >Nivel Educativo:</label
+              >
+              <select
+                name="idNivelEducativo"
+                id="idNivelEducativo"
+                class="form-control"
+              >
+                <option value="" selected>Selecciona un nivel educativo</option>
+                <option
+                  th:each="nivel : ${niveles}"
+                  th:value="${nivel.id}"
+                  th:text="${nivel.nombre}"
+                ></option>
+                >
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 d-grid gap-2">
+          <button class="btn btn-primary text-dark rounded-pill btn-sm">
+            Buscar
+          </button>
+        </div>
+        <hr />
+      </form>
+      <div class="mx-3">
+        <h5 class="rowdies-regular my-3 text-center text-light fs-4">
+          Resultados de la Búsqueda
+        </h5>
+        <div id="results"></div>
+      </div>
+      <div class="mb-3 mx-3">
+        <a class="text-light" href="/usuarios">Regresar</a>
+      </div>
+    </main>
+
+    <script>
+      document
+        .getElementById("searchForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get form values
+          const nombre = document.getElementById("nombre").value || null;
+          const apellido = document.getElementById("apellido").value || null;
+          const carnet = document.getElementById("carnet").value || null;
+          const idRol = document.getElementById("idRol").value || null;
+          const estado = document.getElementById("estado").value || null;
+          const idSeccion = document.getElementById("idSeccion").value || null;
+          const idGrado = document.getElementById("idGrado").value || null;
+          const idNivelEducativo =
+            document.getElementById("idNivelEducativo").value || null;
+
+          // Construct the request body
+          const body = {
+            carnet: carnet,
+            nombre: nombre,
+            apellido: apellido,
+            rol: idRol,
+            grado: idGrado,
+            seccion: idSeccion,
+            nivel: idNivelEducativo,
+            estado: estado,
+          };
+
+          // Make the POST request
+          fetch("http://localhost:8085/arrupe/sv/arrupe/usuarios/buscar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          })
+            .then((response) => {
+              if (response.status === 404) {
+                // Si es un 404, mostrar que no se encontraron resultados
+                throw new Error("No se encontraron resultados.");
+              } else if (!response.ok) {
+                // Si la respuesta no es exitosa, lanzar un error
+                throw new Error("Ocurrió un error al buscar los usuarios.");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const resultsContainer = document.getElementById("results");
+              resultsContainer.innerHTML = ""; // Limpiar resultados anteriores
+
+              // Verificar si hay resultados
+              if (data.length === 0) {
+                resultsContainer.innerHTML =
+                  "<p class='text-light text-center'>No se encontraron resultados.</p>";
+              } else {
+                // Iterar sobre los resultados y mostrarlos
+                data.forEach((usuario) => {
+                  const resultHTML = `
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <b>Nombres: </b>${usuario[2]}
+              </li>
+              <li class="list-group-item">
+                <b>N° Carné: </b>${usuario[1]}
+              </li>
+              <li class="list-group-item">
+                <b>Estado: </b>${usuario[15]}
+              </li>
+              <li class="list-group-item">
+                <b>Grado: </b>${usuario[8]}
+              </li>
+              <li class="list-group-item">
+                <b>Nivel Educativo: </b>${usuario[12]}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <b>Apellidos: </b>${usuario[3]}
+              </li>
+              <li class="list-group-item">
+                <b>Correo: </b>${usuario[13]}
+              </li>
+              <li class="list-group-item">
+                <b>Número de Teléfono: </b>${usuario[14]}
+              </li>
+              <li class="list-group-item">
+                <b>Rol: </b>${usuario[6]}
+              </li>
+              <li class="list-group-item">
+                <b>Sección: </b>${usuario[10]}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        `;
+                  resultsContainer.innerHTML += resultHTML;
+                });
+              }
+            })
+            .catch((error) => {
+              const resultsContainer = document.getElementById("results");
+              resultsContainer.innerHTML = `<p class='text-light text-center'>${error.message}</p>`;
+            });
+        });
+    </script>
+  </body>
+</html>

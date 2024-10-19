@@ -123,5 +123,20 @@ public class UsuarioController {
 
         return "redirect:/usuarios";
     }
+    
+    @RequestMapping("/buscar-usuario")
+    public String buscarUsuario(Model model) {
+        // Para mostrarlos en el Dropdown (Select)
+        model.addAttribute("roles", rolRepository.findAll());
+        model.addAttribute("grados", gradoRepository.findAll());
+        model.addAttribute("secciones", seccionRepository.findAll());
+        model.addAttribute("niveles", nivelEducativoRepository.findAll());
+        return "admin/usuarios/buscar_usuario";
+    }
+    
+    @RequestMapping("/agregar-usuarios-csv")
+    public String agregarUsuariosCSV(Model model) {
+        return "admin/usuarios/agregar_usuarios_csv";
+    }
 
 }
