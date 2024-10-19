@@ -12,5 +12,9 @@ public interface ProgresoEstudianteRepository extends JpaRepository<ProgresoEstu
     // Query personalizada para encontrar el progreso que coincida con el idLeccion y el idUsuario
     @Query("SELECT pe FROM ProgresoEstudiante pe WHERE pe.idLeccion = :idLeccion AND pe.idUsuario = :idUsuario")
     ProgresoEstudiante findByIdLeccionAndIdUsuario(@Param("idLeccion") Long idLeccion, @Param("idUsuario") Long idUsuario);
-
+    
+    // Query personalizada para encontrar el promedio de todos los promedios de todas las lecciones
+    @Query("SELECT AVG(pe.porcentajeCompletado) FROM ProgresoEstudiante pe")
+    Double findAveragePorcentajeCompletado();
+    
 }

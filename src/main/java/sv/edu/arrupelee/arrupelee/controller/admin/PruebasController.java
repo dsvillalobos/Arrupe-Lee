@@ -43,10 +43,11 @@ public class PruebasController {
     }
     
     @RequestMapping("/guardar-vinculacion")
-    public String guardarVinculacion(Model mode, @RequestParam Long idLeccion, @RequestParam Long idPrueba) {
+    public String guardarVinculacion(Model mode, @RequestParam Long idLeccion, @RequestParam Long idPrueba, @RequestParam String estado) {
         LeccionesPruebas leccionesPruebas = new LeccionesPruebas();
         leccionesPruebas.setIdLeccion(idLeccion);
         leccionesPruebas.setIdPrueba(idPrueba);
+        leccionesPruebas.setEstado(estado);
         leccionesPruebasRepository.save(leccionesPruebas);
         
         return "redirect:/pruebas-admin";

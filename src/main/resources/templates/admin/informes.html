@@ -27,15 +27,14 @@
     <link rel="stylesheet" href="/stylesheets/styles.css" />
     <script th:inline="javascript">
       /*<![CDATA[*/
-      document.addEventListener("DOMContentLoaded", function () {
-        sessionStorage.setItem("ID", encodeURIComponent(/*[[${ID}]]*/));
-        sessionStorage.setItem("correo", encodeURIComponent(/*[[${correo}]]*/));
-        sessionStorage.setItem("carnet", encodeURIComponent(/*[[${carnet}]]*/));
-      });
+      var nEstudiantes = /*[[${nEstudiantes}]]*/ null;
+      var nDocentes = /*[[${nDocentes}]]*/ null;
+      var nDocentes = /*[[${nDocentes}]]*/ null;
+      var nAdmins = /*[[${nAdmins}]]*/ null;
       /*]]>*/
     </script>
   </head>
-  <body class="mb-4">
+  <body class="mb-4" style="overflow-x: hidden !important">
     <!-- Header -->
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg bg-dark">
@@ -77,7 +76,7 @@
         </div>
       </nav>
     </header>
-    <main class="container mt-4">
+    <main class="mt-4">
       <div id="informesContainer">
         <div class="text-center mb-3 text-light">
           <h3 class="fs-2 rowdies-regular mb-3">Informes</h3>
@@ -85,112 +84,60 @@
             Obten informes sobre los diferentes aspectos de Planeta Arrupe.
           </div>
         </div>
-        <div class="row pt-2 mb-4 col-md-10 mx-auto">
-          <hr />
-          <div class="text-center mb-3">
-            <h5 class="text-light">Informes de Usuarios</h5>
-          </div>
-          <div class="col mb-3">
-            <div class="card">
-              <div class="card-body text-center text-light">
-                <h5 class="card-title fs-5"># de Estudiantes</h5>
-                <p
-                  class="card-text fs-6"
-                  id="nEstudiantes"
-                  th:text="${nEstudiantes}"
-                ></p>
-              </div>
+        <div class="row justify-content-center text-center mb-4">
+          <div class="col-md-4">
+            <div class="card text-light py-2">
+              <h5 class="card-title">N° de Usuarios</h5>
+              <p
+                class="card-text fs-1 rowdies-regular"
+                th:text="${usuariosTotales}"
+              ></p>
             </div>
           </div>
-          <div class="col mb-3">
-            <div class="card">
-              <div class="card-body text-center text-light">
-                <h5 class="card-title fs-5"># de Docentes</h5>
-                <p
-                  class="card-text fs-6"
-                  id="nDocentes"
-                  th:text="${nDocentes}"
-                ></p>
-              </div>
-            </div>
-          </div>
-          <div class="col mb-3">
-            <div class="card">
-              <div class="card-body text-center text-light">
-                <h5 class="card-title fs-5"># de Administradores</h5>
-                <p class="card-text fs-6" id="nAdmins" th:text="${nAdmins}"></p>
-              </div>
+          <div class="col-md-4">
+            <div class="card text-light py-2">
+              <h5 class="card-title">Progreso Promedio en las Lecciones</h5>
+              <p
+                class="card-text fs-1 rowdies-regular"
+                th:text="${progresoPromedioLecciones}"
+              ></p>
             </div>
           </div>
         </div>
-        <div class="row mb-4">
-          <div class="col mb-3">
-            <div class="chart-container">
-              <canvas id="graficaUsuarios"></canvas>
-            </div>
+        <div class="row mx-5">
+          <div class="col-md-6 text-center">
+            <h5 class="text-light h6">Usuarios en Planeta Arrupe</h5>
+            <canvas id="usuariosChart"></canvas>
           </div>
-        </div>
-        <div class="col-md-10 mx-auto">
-          <hr />
-        </div>
-      </div>
-      <div class="col-md-10 mx-auto">
-        <div class="d-grid gap-2">
-          <button class="btn btn-primary btn-sm" onclick="obtenerReporte()">
-            <i class="fa-solid fa-file-pdf px-1"></i> Obtener reporte en PDF
-          </button>
         </div>
       </div>
     </main>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById("graficaUsuarios").getContext("2d");
-        const nEstudiantes = document.getElementById("nEstudiantes").innerHTML;
-        const nDocentes = document.getElementById("nDocentes").innerHTML;
-        const nAdmins = document.getElementById("nAdmins").innerHTML;
-
-        const barChart = new Chart(ctx, {
+        const ctx = document.getElementById("usuariosChart").getContext("2d");
+        const usuariosChart = new Chart(ctx, {
           type: "bar",
           data: {
             labels: ["Estudiantes", "Docentes", "Administradores"],
             datasets: [
               {
-                label: "# de Personas",
+                label: "Número de Usuarios",
                 data: [nEstudiantes, nDocentes, nAdmins],
                 backgroundColor: [
-                  "rgba(248, 115, 63, 0.60)",
-                  "rgba(39, 149, 77, 0.60)",
-                  "rgba(200, 5, 6, 0.60)",
+                  "rgba(248, 115, 63, 0.6)",
+                  "rgba(39, 149, 77, 0.6)",
+                  "rgba(200, 5, 6, 0.6)",
                 ],
                 borderColor: [
-                  "rgba(248, 115, 63, 1)",
-                  "rgba(39, 149, 77, 1)",
-                  "rgba(200, 5, 6, 1)",
+                  "rgba(248, 115, 63, 0.7)",
+                  "rgba(39, 149, 77, 0.7)",
+                  "rgba(200, 5, 6, 0.7)",
                 ],
-                borderWidth: 2,
+                borderWidth: 1,
               },
             ],
           },
           options: {
-            responsive: true,
-            scales: {
-              x: {
-                ticks: {
-                  color: "#ffffff",
-                },
-              },
-              y: {
-                ticks: {
-                  color: "#ffffff",
-                },
-              },
-            },
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            maintainAspectRatio: false,
             scales: {
               y: {
                 beginAtZero: true,
@@ -199,32 +146,6 @@
           },
         });
       });
-
-      function obtenerReporte() {
-        const opt = {
-          margin: 0,
-          filename: "reporte.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
-          jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-        };
-
-        const element = document.getElementById("informesContainer");
-
-        // Color de fondo del PDF
-        element.style.backgroundColor = "#763178";
-
-        element.style.height = "1200px";
-
-        // Generar el PDF
-        html2pdf()
-          .from(element)
-          .set(opt)
-          .save()
-          .then(() => {
-            window.location.reload();
-          });
-      }
     </script>
   </body>
 </html>
