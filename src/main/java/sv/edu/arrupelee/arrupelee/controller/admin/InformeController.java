@@ -30,7 +30,12 @@ public class InformeController {
         model.addAttribute("nEstudiantes", informeRepository.findByidRol(1L).size()); // 1 es el ID Rol del Estudiante
         model.addAttribute("nDocentes", informeRepository.findByidRol(2L).size()); // 2 es el ID Rol del Docente
         model.addAttribute("nAdmins", informeRepository.findByidRol(3L).size()); // 3 es el ID Rol del Docente
-        model.addAttribute("progresoPromedioLecciones", progresoEstudianteRepository.findAveragePorcentajeCompletado());
+        model.addAttribute("progresoPromedioLecciones", progresoEstudianteRepository.findAveragePorcentajeCompletado().intValue());
+        // Obtener el promedio de progreso segun el nivel literario
+        model.addAttribute("progresoPromedioLiteral", progresoEstudianteRepository.findAveragePorcentajeCompletadoByNivelLiterario("LITERAL"));
+        model.addAttribute("progresoPromedioInferencial", progresoEstudianteRepository.findAveragePorcentajeCompletadoByNivelLiterario("INFERENCIAL"));
+        model.addAttribute("progresoPromedioCritico", progresoEstudianteRepository.findAveragePorcentajeCompletadoByNivelLiterario("CRITICO"));
+
         return "admin/informes";
     }
 

@@ -138,5 +138,22 @@ public class UsuarioController {
     public String agregarUsuariosCSV(Model model) {
         return "admin/usuarios/agregar_usuarios_csv";
     }
+    
+    @RequestMapping("/estado-usuario-admin/{idUsuario}")
+    public String estadoUsuarioAdmin(Model model, @PathVariable Long idUsuario) {
+        Usuario usuarioEstado = usuarioRepository.findById(idUsuario).orElse(null);
+        model.addAttribute("idUsuario", usuarioEstado.getId());
+        model.addAttribute("nombreEstadoUsuario", usuarioEstado.getNombre() + " " + usuarioEstado.getApellido());
+        return "admin/usuarios/estado_usuario";
+    }
+    
+    @RequestMapping("/guardar-estado-usuario-admin")
+    public String guardarEstadoUsuarioAdmin(Model model, @RequestParam Long idUsuario, @RequestParam String estado) {
+        Usuario usuarioEstado = usuarioRepository.findById(idUsuario).orElse(null);
+        usuarioEstado.setEstado(estado);
+        usuarioRepository.save(usuarioEstado);
+        
+        return "redirect:/usuarios";
+    }
 
 }

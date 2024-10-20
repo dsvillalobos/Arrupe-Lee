@@ -17,4 +17,8 @@ public interface ProgresoEstudianteRepository extends JpaRepository<ProgresoEstu
     @Query("SELECT AVG(pe.porcentajeCompletado) FROM ProgresoEstudiante pe")
     Double findAveragePorcentajeCompletado();
     
+    // Query personalizada para encontrar el promedio del un nivel literario
+    @Query("SELECT AVG(pe.porcentajeCompletado) FROM ProgresoEstudiante pe JOIN Lecciones l ON pe.idLeccion = l.id WHERE l.nivelLiterario = :nivelLiterario")
+    Double findAveragePorcentajeCompletadoByNivelLiterario(@Param("nivelLiterario") String nivelLiterario);
+    
 }

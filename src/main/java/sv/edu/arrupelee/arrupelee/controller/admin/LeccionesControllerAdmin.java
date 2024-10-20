@@ -53,4 +53,21 @@ public class LeccionesControllerAdmin {
         return "redirect:/lecciones";
     }
     
+    @RequestMapping("/estado-leccion-admin/{idLeccion}")
+    public String estadoLeccionAdmin(Model model, @PathVariable Long idLeccion) {
+        Lecciones leccionEstado = leccionesRepository.findById(idLeccion).orElse(null);
+        model.addAttribute("idLeccion", leccionEstado.getId());
+        model.addAttribute("nombreEstadoLeccion", leccionEstado.getNombre());
+        return "admin/lecciones/estado_leccion";
+    }
+    
+    @RequestMapping("/guardar-estado-leccion-admin")
+    public String guardarEstadoLeccionAdmin(Model model, @RequestParam Long idLeccion, @RequestParam String estado) {
+        Lecciones leccionEstado = leccionesRepository.findById(idLeccion).orElse(null);
+        leccionEstado.setEstado(estado);
+        leccionesRepository.save(leccionEstado);
+        
+        return "redirect:/lecciones";
+    }
+    
 }

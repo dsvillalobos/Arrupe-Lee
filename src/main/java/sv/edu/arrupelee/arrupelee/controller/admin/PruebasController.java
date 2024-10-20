@@ -53,4 +53,20 @@ public class PruebasController {
         return "redirect:/pruebas-admin";
     }
     
+    @RequestMapping("/estado-prueba-admin/{idPrueba}")
+    public String estadoPruebaAdmin(Model model, @PathVariable Long idPrueba) {
+        LeccionesPruebas leccionesPruebasEstado = leccionesPruebasRepository.findById(idPrueba).orElse(null);
+        model.addAttribute("idPrueba", leccionesPruebasEstado.getId());
+        return "admin/pruebas/estado_prueba";
+    }
+    
+    @RequestMapping("/guardar-estado-prueba-admin")
+    public String guardarEstadoPruebaAdmin(Model model, @RequestParam Long idPrueba, @RequestParam String estado) {
+        LeccionesPruebas leccionesPruebasEstado = leccionesPruebasRepository.findById(idPrueba).orElse(null);
+        leccionesPruebasEstado.setEstado(estado);
+        leccionesPruebasRepository.save(leccionesPruebasEstado);
+        
+        return "redirect:/pruebas-admin";
+    }
+    
 }

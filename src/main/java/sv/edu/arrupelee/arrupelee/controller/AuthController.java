@@ -21,7 +21,7 @@ public class AuthController {
         Usuario usuario = authRepository.findByCarnet(carnet);
 
         if (usuario != null) {
-            if (usuario.getContrasena().equals(contrasena)) {
+            if (usuario.getContrasena().equals(contrasena) && usuario.getEstado().equals("HABILITADO")) {
                 model.addAttribute("usuario", (usuario.getNombre() + " " + usuario.getApellido()));
                 model.addAttribute("ID", usuario.getId());
                 model.addAttribute("correo", usuario.getCorreo());

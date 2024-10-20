@@ -31,6 +31,10 @@
       var nDocentes = /*[[${nDocentes}]]*/ null;
       var nDocentes = /*[[${nDocentes}]]*/ null;
       var nAdmins = /*[[${nAdmins}]]*/ null;
+      var progresoPromedioLiteral = /*[[${progresoPromedioLiteral}]]*/ null;
+      var progresoPromedioInferencial =
+        /*[[${progresoPromedioInferencial}]]*/ null;
+      var progresoPromedioCritico = /*[[${progresoPromedioCritico}]]*/ null;
       /*]]>*/
     </script>
   </head>
@@ -99,7 +103,7 @@
               <h5 class="card-title">Progreso Promedio en las Lecciones</h5>
               <p
                 class="card-text fs-1 rowdies-regular"
-                th:text="${progresoPromedioLecciones}"
+                th:text="@{${progresoPromedioLecciones} + '%'}"
               ></p>
             </div>
           </div>
@@ -109,13 +113,19 @@
             <h5 class="text-light h6">Usuarios en Planeta Arrupe</h5>
             <canvas id="usuariosChart"></canvas>
           </div>
+          <div class="col-md-6 text-center">
+            <h5 class="text-light h6">
+              Progreso Promedio según Nivel Literario
+            </h5>
+            <canvas id="progresoNivelesChart"></canvas>
+          </div>
         </div>
       </div>
     </main>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById("usuariosChart").getContext("2d");
-        const usuariosChart = new Chart(ctx, {
+        const ctx1 = document.getElementById("usuariosChart").getContext("2d");
+        const usuariosChart = new Chart(ctx1, {
           type: "bar",
           data: {
             labels: ["Estudiantes", "Docentes", "Administradores"],
@@ -123,6 +133,44 @@
               {
                 label: "Número de Usuarios",
                 data: [nEstudiantes, nDocentes, nAdmins],
+                backgroundColor: [
+                  "rgba(248, 115, 63, 0.6)",
+                  "rgba(39, 149, 77, 0.6)",
+                  "rgba(200, 5, 6, 0.6)",
+                ],
+                borderColor: [
+                  "rgba(248, 115, 63, 0.7)",
+                  "rgba(39, 149, 77, 0.7)",
+                  "rgba(200, 5, 6, 0.7)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+
+        const ctx2 = document
+          .getElementById("progresoNivelesChart")
+          .getContext("2d");
+        const progresoNivelesChart = new Chart(ctx2, {
+          type: "bar",
+          data: {
+            labels: ["Literal", "Inferencial", "Crítico"],
+            datasets: [
+              {
+                label: "% Promedio",
+                data: [
+                  progresoPromedioLiteral,
+                  progresoPromedioInferencial,
+                  progresoPromedioCritico,
+                ],
                 backgroundColor: [
                   "rgba(248, 115, 63, 0.6)",
                   "rgba(39, 149, 77, 0.6)",
