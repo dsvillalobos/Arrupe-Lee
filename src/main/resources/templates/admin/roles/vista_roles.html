@@ -73,28 +73,19 @@
           Maneja los diferentes roles de Planeta Arrupe.
         </div>
       </div>
-      <div class="d-grid gap-2 mb-3 mx-5">
-        <a
-          class="btn btn-primary text-dark rounded-pill btn-sm"
-          href="/agregar-rol"
-          >Agregar Rol</a
-        >
-      </div>
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
+            <th style="width: 80% !important">Descripción</th>
+            <th class="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="rol : ${roles}">
-            <td th:text="${rol.id}"></td>
-            <td th:text="${rol.descripcion}"></td>
+            <td style="width: 80% !important" th:text="${rol.descripcion}"></td>
             <td class="d-grid gap-2">
               <a
-                class="btn btn-secondary btn-sm rounded-pill"
+                class="btn btn-secondary btn-sm"
                 th:href="@{'/editar-rol/' + ${rol.id}}"
                 >Editar</a
               >

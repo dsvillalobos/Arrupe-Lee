@@ -87,7 +87,8 @@ th {
 
 td,
 input,
-.form-control {
+.form-control,
+.list-group-item-success {
   background-color: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid white !important;
   color: white !important;
@@ -189,4 +190,8 @@ select option {
 .certificado-imagen-container img {
   vertical-align: middle !important;
   margin-right: 80px !important;
+}
+
+.img-disabled {
+  filter: grayscale(100%) !important;
 }

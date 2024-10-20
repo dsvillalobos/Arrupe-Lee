@@ -79,11 +79,18 @@
       </div>
       <div class="row">
         <div class="col-md-12 my-3" th:each="leccion, stat : ${lecciones}">
-          <div class="card bg-dark text-light h-100 lecciones-card">
+          <div
+            class="card bg-dark text-light h-100 lecciones-card"
+            th:style="${stat.index == 0 || progresoLecciones[stat.index - 1] == 100} ? '' : 'pointer-events: none; background-color: #4d4d4c !important;'"
+          >
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-1 col-md-1 text-center">
-                  <img src="/images/imgLecciones.png" alt="" />
+                  <img
+                    src="/images/imgLecciones.png"
+                    th:classappend="${stat.index == 0 || progresoLecciones[stat.index - 1] == 100} ? '' : 'img-disabled'"
+                    alt=""
+                  />
                 </div>
                 <div class="col-sm-11 col-md-11">
                   <h5 class="card-title">

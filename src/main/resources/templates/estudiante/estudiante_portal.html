@@ -91,7 +91,11 @@
             <img src="/images/nivelInferencial.png" alt="" />
           </a>
           <div th:if="${promedioLiteral != 100}">
-            <img src="/images/nivelInferencial.png" alt="" />
+            <img
+              class="img-disabled"
+              src="/images/nivelInferencial.png"
+              alt=""
+            />
           </div>
         </div>
         <div class="col">
@@ -99,7 +103,7 @@
             <img src="/images/nivelCritico.png" alt="" />
           </a>
           <div th:if="${promedioInferencial != 100}">
-            <img src="/images/nivelCritico.png" alt="" />
+            <img class="img-disabled" src="/images/nivelCritico.png" alt="" />
           </div>
         </div>
       </div>

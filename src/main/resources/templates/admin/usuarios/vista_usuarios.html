@@ -73,35 +73,56 @@
           Maneja los diferentes usuarios que tendrán acceso a Planeta Arrupe.
         </div>
       </div>
-      <div class="d-grid gap-2 mb-3 mx-5">
-        <a
-          class="btn btn-primary text-dark rounded-pill btn-sm"
-          href="/agregar-usuario"
-          >Agregar Usuario</a
-        >
+      <div class="row">
+        <div class="col">
+          <div class="d-grid gap-2 mb-3">
+            <a class="btn btn-primary text-dark btn-sm" href="/agregar-usuario"
+              >Agregar Usuario</a
+            >
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-grid gap-2 mb-3">
+            <a
+              class="btn btn-primary text-dark btn-sm"
+              href="/agregar-usuarios-csv"
+              >Agregar Usuarios por Archivo .CSV</a
+            >
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-grid gap-2 mb-3">
+            <a class="btn btn-primary text-dark btn-sm" href="/buscar-usuario"
+              >Buscar Usuario</a
+            >
+          </div>
+        </div>
       </div>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table align-middle">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nombres</th>
-              <th>Apellido</th>
-              <th>Carné</th>
-              <th>Acciones</th>
+              <th class="text-center">Nombres</th>
+              <th class="text-center">Apellido</th>
+              <th class="text-center">Carné</th>
+              <th class="text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr th:each="usuario : ${usuarios}">
-              <td th:text="${usuario.id}"></td>
-              <td th:text="${usuario.nombre}"></td>
-              <td th:text="${usuario.apellido}"></td>
-              <td th:text="${usuario.carnet}"></td>
+              <td class="text-center" th:text="${usuario.nombre}"></td>
+              <td class="text-center" th:text="${usuario.apellido}"></td>
+              <td class="text-center" th:text="${usuario.carnet}"></td>
               <td class="d-grid gap-2">
                 <a
-                  class="btn btn-secondary btn-sm rounded-pill"
+                  class="btn btn-secondary btn-sm mx-2"
                   th:href="@{'/detalle-usuario/' + ${usuario.id}}"
                   >Ver Detalles</a
+                >
+                <a
+                  class="btn btn-secondary btn-sm mx-2"
+                  th:href="@{'/editar-usuario/' + ${usuario.id}}"
+                  >Editar</a
                 >
               </td>
             </tr>

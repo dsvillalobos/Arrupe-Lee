@@ -71,13 +71,18 @@
         <h3 class="fs-2 rowdies-regular mb-3">Resultado de la Prueba</h3>
       </div>
       <div class="mx-3">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b>Estudiante: </b
-            ><span th:text="${nombreEstudianteResultadPrueba}"></span>
-          </li>
-          <li class="list-group-item"><b>Fecha: </b><span></span></li>
-        </ul>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Estudiante:</th>
+              <td><span th:text="${nombreEstudianteResultadPrueba}"></span></td>
+            </tr>
+            <tr>
+              <th>Fecha:</th>
+              <td><span></span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
     <script th:inline="javascript">
@@ -85,7 +90,6 @@
       var idPrueba = /*[[${idDetallePrueba}]]*/ null;
       var idUsuario = /*[[${ID}]]*/ null;
       console.log(idPrueba);
-
       /*]]>*/
     </script>
     <script>
@@ -103,26 +107,24 @@
             const lastResult = matchingResults[matchingResults.length - 1];
 
             if (lastResult) {
-              // Update the list items with the result
+              // Update the table cell with the result
               document.querySelector(
-                ".list-group-item:nth-child(2) span"
+                "table tbody tr:nth-child(2) td span"
               ).textContent = new Date(lastResult[5]).toLocaleString();
 
-              // Create new list items for code and score
-              const codeItem = document.createElement("li");
-              codeItem.className = "list-group-item";
-              codeItem.innerHTML = `<b>Código: </b><span>${lastResult[3]}</span>`;
+              // Create new table rows for code and score
+              const codeRow = document.createElement("tr");
+              codeRow.innerHTML = `<th>N° Carné:</th><td>${lastResult[3]}</td>`;
 
-              const scoreItem = document.createElement("li");
-              scoreItem.className = "list-group-item";
-              scoreItem.innerHTML = `<b>Puntaje: </b><span>${lastResult[4].toFixed(
+              const scoreRow = document.createElement("tr");
+              scoreRow.innerHTML = `<th>Puntaje:</th><td>${lastResult[4].toFixed(
                 2
-              )}</span>`;
+              )}</td>`;
 
-              // Append new items to the list
-              const list = document.querySelector(".list-group");
-              list.appendChild(codeItem);
-              list.appendChild(scoreItem);
+              // Append new rows to the table
+              const tableBody = document.querySelector("table tbody");
+              tableBody.appendChild(codeRow);
+              tableBody.appendChild(scoreRow);
             } else {
               console.log("No matching results found");
             }

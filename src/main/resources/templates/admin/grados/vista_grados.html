@@ -74,27 +74,26 @@
         </div>
       </div>
       <div class="d-grid gap-2 mb-3 mx-5">
-        <a
-          class="btn btn-primary text-dark rounded-pill btn-sm"
-          href="/agregar-grado"
+        <a class="btn btn-primary text-dark btn-sm" href="/agregar-grado"
           >Agregar Grado</a
         >
       </div>
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
+            <th style="width: 80% !important">Descripción</th>
+            <th class="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="grado : ${grados}">
-            <td th:text="${grado.id}"></td>
-            <td th:text="${grado.descripcion}"></td>
+            <td
+              style="width: 80% !important"
+              th:text="${grado.descripcion}"
+            ></td>
             <td class="d-grid gap-2">
               <a
-                class="btn btn-secondary btn-sm rounded-pill"
+                class="btn btn-secondary btn-sm"
                 th:href="@{'/editar-grado/' + ${grado.id}}"
                 >Editar</a
               >
