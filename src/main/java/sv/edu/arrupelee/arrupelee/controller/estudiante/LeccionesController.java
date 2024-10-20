@@ -207,8 +207,8 @@ public class LeccionesController {
     }
 
     // Esta ruta literalmente es para mostrar las lecciones
-    @RequestMapping("/leccion/{id}")
-    public String mostrarLeccion(Model model, @PathVariable Long id) {
+    @RequestMapping("/leccion/{id}/{progresoLeccion}")
+    public String mostrarLeccion(Model model, @PathVariable Long id, @PathVariable int progresoLeccion) {
         Lecciones leccion = leccionesRepository.findById(id).orElse(null);
 
         // Aquí separo de las comas las imagenes de la leccion
@@ -219,6 +219,9 @@ public class LeccionesController {
 
         // Mandar la leccion a la vista
         model.addAttribute("leccion", leccion);
+        
+        // Mandar el progreso de la leccion a la vista
+        model.addAttribute("progresoLeccionVista", progresoLeccion);
         
         // Mandar a la vista el id de la prueba vinculado a la leccion
         // Verificar si es nulo, es decir, que no haya una prueba viculada a la leccion

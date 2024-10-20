@@ -91,7 +91,7 @@
                   <h5 class="card-title">
                     <a
                       class="text-decoration-none text-light py-3 mb-3"
-                      th:href="${stat.index == 0 || progresoLecciones[stat.index - 1] == 100} ? '/leccion/' + ${leccion.id} : null"
+                      th:href="${stat.index == 0 || progresoLecciones[stat.index - 1] == 100} ? '/leccion/' + ${leccion.id} + '/' + ${#numbers.formatDecimal(progresoLecciones[stat.index], 0, 0)} : null"
                       th:classappend="${stat.index == 0 || progresoLecciones[stat.index - 1] == 100} ? '' : 'disabled-link'"
                       th:text="${leccion.nombre}"
                     ></a>
