@@ -19,6 +19,8 @@ import sv.edu.arrupelee.arrupelee.model.estudiante.ProgresoEstudiante;
 import sv.edu.arrupelee.arrupelee.repositories.estudiante.ProgresoEstudianteRepository;
 import sv.edu.arrupelee.arrupelee.model.estudiante.LeccionesPruebas;
 import sv.edu.arrupelee.arrupelee.repositories.estudiante.LeccionesPruebasRepository;
+import sv.edu.arrupelee.arrupelee.model.admin.Usuario;
+import sv.edu.arrupelee.arrupelee.repositories.admin.UsuarioRepository;
 
 @Controller
 @SessionAttributes({"usuario", "ID", "correo", "carnet", "nivelEducativo", "promedioLiteral", "promedioInferencial", "promedioCritico"})
@@ -35,6 +37,9 @@ public class LeccionesController {
     
     @Autowired
     LeccionesPruebasRepository leccionesPruebasRepository;
+    
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     // Navegacion para acceder al portal del estudiante (Desde donde se cargaran las lecciones)
     @RequestMapping("/portal-estudiante")
@@ -266,5 +271,15 @@ public class LeccionesController {
         model.addAttribute("idPrueba", leccionesPruebas.getIdPrueba());
         return "estudiante/pruebas/vista_prueba";
     }
-
+    
+    // Ruta para ir a a la vista del detalle de la prueba
+    @RequestMapping("/resultado-prueba/{idPrueba}")
+    public String resultadoPrueba(Model model, @PathVariable Long idPrueba, @SessionAttribute("ID") Long idUsuario) {
+        model.addAttribute("idDetallePrueba", idPrueba);
+        // Obtener el nombre del estudiante
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+        model.addAttribute("nombreEstudianteResultadPrueba", usuario.getNombre() + " " + usuario.getApellido());
+        return "estudiante/pruebas/resultado_prueba";
+    }
+    
 }
