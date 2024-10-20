@@ -87,14 +87,20 @@
           /></a>
         </div>
         <div class="col">
-          <a href="/lecciones-inferencial"
-            ><img src="/images/nivelInferencial.png" alt=""
-          /></a>
+          <a th:if="${promedioLiteral == 100}" href="/lecciones-inferencial">
+            <img src="/images/nivelInferencial.png" alt="" />
+          </a>
+          <div th:if="${promedioLiteral != 100}">
+            <img src="/images/nivelInferencial.png" alt="" />
+          </div>
         </div>
         <div class="col">
-          <a href="/lecciones-critico"
-            ><img src="/images/nivelCritico.png" alt=""
-          /></a>
+          <a th:if="${promedioInferencial == 100}" href="/lecciones-critico">
+            <img src="/images/nivelCritico.png" alt="" />
+          </a>
+          <div th:if="${promedioInferencial != 100}">
+            <img src="/images/nivelCritico.png" alt="" />
+          </div>
         </div>
       </div>
       <div class="bitacora-container">
