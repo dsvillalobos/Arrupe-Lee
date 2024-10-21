@@ -282,9 +282,29 @@ public class LeccionesController {
     @RequestMapping("/resultado-prueba/{idPrueba}")
     public String resultadoPrueba(Model model, @PathVariable Long idPrueba, @SessionAttribute("ID") Long idUsuario) {
         model.addAttribute("idDetallePrueba", idPrueba);
+        
         // Obtener el nombre del estudiante
         Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
         model.addAttribute("nombreEstudianteResultadPrueba", usuario.getNombre() + " " + usuario.getApellido());
+        
+        // Obtener el idLeccion basado en el idPrueba
+        Long idLeccion = leccionesPruebasRepository.findIdLeccionByIdPrueba(idPrueba);
+        
+        // Mandar el idLeccio a la vista
+        model.addAttribute("idLeccionResultado", idLeccion);
+        
+        // Obtener los datos de la leccion (nombre)
+        Lecciones leccion = leccionesRepository.findById(idLeccion).orElse(null);
+        model.addAttribute("nombreLeccionResultado", leccion.getNombre());
+        
+        // Obtener el procentaje completado basado en el idUsuario y idLeccion
+        ProgresoEstudiante progresoEstudiante = progresoEstudianteRepository.findByIdLeccionAndIdUsuario(idLeccion, idUsuario);
+        int porcentajeCompletado = (int) Math.round(progresoEstudiante.getPorcentajeCompletado());
+        
+        // Mandarlo a la vista
+        model.addAttribute("porcentajeCompletadoResultado", porcentajeCompletado);
+        
+        
         return "estudiante/pruebas/resultado_prueba";
     }
     

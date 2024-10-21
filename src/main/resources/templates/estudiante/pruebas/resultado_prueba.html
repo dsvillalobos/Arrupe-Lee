@@ -69,26 +69,44 @@
     <main class="container mt-4">
       <div class="text-center mb-3 text-light">
         <h3 class="fs-2 rowdies-regular mb-3">Resultado de la Prueba</h3>
+        <h5
+          class="fs-5 rowdies-regular mb-3"
+          th:text="${nombreLeccionResultado}"
+        ></h5>
       </div>
       <div class="mx-3">
         <table class="table">
           <tbody>
             <tr>
-              <th>Estudiante:</th>
-              <td><span th:text="${nombreEstudianteResultadPrueba}"></span></td>
-            </tr>
-            <tr>
-              <th>Fecha:</th>
-              <td><span></span></td>
+              <th style="width: 25% !important">Estudiante:</th>
+              <td style="width: 75% !important">
+                <span th:text="${nombreEstudianteResultadPrueba}"></span>
+              </td>
             </tr>
           </tbody>
         </table>
+        <div
+          class="my-3 text-center text-light p-2 bg-dark"
+          id="resultadoContainer"
+        ></div>
+        <div class="mb-3 d-grid gap-2">
+          <button
+            class="btn btn-primary btn-sm"
+            id="regresarBtn"
+            onclick="regresar()"
+          >
+            Regresar a la lección
+          </button>
+        </div>
       </div>
     </main>
     <script th:inline="javascript">
       /*<![CDATA[*/
       var idPrueba = /*[[${idDetallePrueba}]]*/ null;
       var idUsuario = /*[[${ID}]]*/ null;
+      var idLeccionResultado = /*[[${idLeccionResultado}]]*/ null;
+      var porcentajeCompletadoResultado =
+        /*[[${porcentajeCompletadoResultado}]]*/ null;
       console.log(idPrueba);
       /*]]>*/
     </script>
@@ -107,24 +125,34 @@
             const lastResult = matchingResults[matchingResults.length - 1];
 
             if (lastResult) {
-              // Update the table cell with the result
-              document.querySelector(
-                "table tbody tr:nth-child(2) td span"
-              ).textContent = new Date(lastResult[5]).toLocaleString();
-
               // Create new table rows for code and score
               const codeRow = document.createElement("tr");
-              codeRow.innerHTML = `<th>N° Carné:</th><td>${lastResult[3]}</td>`;
+              codeRow.innerHTML = `<th style="width: 25% !important">N° Carné:</th><td style="width: 75% !important">${lastResult[3]}</td>`;
 
               const scoreRow = document.createElement("tr");
-              scoreRow.innerHTML = `<th>Puntaje:</th><td>${lastResult[4].toFixed(
-                2
-              )}</td>`;
+              scoreRow.innerHTML = `<th style="width: 25% !important">Puntaje:</th><td style="width: 75% !important">Su puntuación total es de: <b>${lastResult[4].toFixed(
+                1
+              )}</b></td>`;
+
+              const dateRow = document.createElement("tr");
+              dateRow.innerHTML = `<th style="width: 25% !important">Fecha de Realización:</th><td style="width: 75% !important">${new Date(
+                lastResult[5]
+              ).toLocaleString()}</td>`;
 
               // Append new rows to the table
               const tableBody = document.querySelector("table tbody");
               tableBody.appendChild(codeRow);
               tableBody.appendChild(scoreRow);
+              tableBody.appendChild(dateRow);
+
+              // Revisar el puntaje
+              if (lastResult[4].toFixed(1) >= 9) {
+                document.getElementById("resultadoContainer").innerHTML =
+                  "¡Felicidades! Has aprobado el ejercicio.";
+              } else {
+                document.getElementById("resultadoContainer").innerHTML =
+                  "No has alcanzado el puntaje mínimo.";
+              }
             } else {
               console.log("No matching results found");
             }
@@ -134,6 +162,10 @@
 
       // Call the function when the DOM is fully loaded
       document.addEventListener("DOMContentLoaded", fetchAndDisplayResult);
+
+      function regresar() {
+        window.location.href = `/leccion/${idLeccionResultado}/${porcentajeCompletadoResultado}`;
+      }
     </script>
   </body>
 </html>

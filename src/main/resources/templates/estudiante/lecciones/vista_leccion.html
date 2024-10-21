@@ -106,30 +106,33 @@
         </button>
       </div>
 
-      <!-- Para dirigirse a una prueba -->
-       <h5 class="text-center mb-3 text-light rowdies-regular">Prueba de Conocimientos</h5>
+      <div id="pruebaContainer">
+        <!-- Para dirigirse a una prueba -->
+        <h5 class="text-center mb-3 text-light rowdies-regular">Prueba de Conocimientos</h5>
 
-       <div class="my-3 d-grid gap-2">
+        <div class="my-3 d-grid gap-2">
         <a class="btn btn-primary btn-sm" th:href="@{'/prueba/' + ${leccion.id}}">Realizar Prueba</a>
-       </div>
+        </div>
 
-       <!-- Tabla con los resultados -->
-       <div class="mb-3">
-        <table class="table" id="resultsTable">
-          <thead>
-            <tr>
-              <th>Intento</th>
-              <th>Fecha de Realización</th>
-              <th>Puntuación</th>
-              <th>Detalles</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Aqui iran los resultados -->
-          </tbody>
-        </table>
+        <!-- Tabla con los resultados -->
+        <div class="mb-3">
+          <table class="table" id="resultsTable">
+            <thead>
+              <tr>
+                <th>Intento</th>
+                <th>Fecha de Realización</th>
+                <th>Puntuación</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Aqui iran los resultados -->
+            </tbody>
+          </table>
+        </div>
+
       </div>
-
+      
        <script th:inline="javascript">
         /*<![CDATA[*/
         var idPrueba_leccion = /*[[${idPrueba_leccion}]]*/ null;
@@ -171,7 +174,11 @@
 
           function handleSlideChange(currentIndex) {
             const slidesViewed = currentIndex + 1;
-            currentProgress = Math.round((slidesViewed / (leccionesTotales + 1)) * 100);
+            if (idPrueba_leccion == null) {
+              currentProgress = Math.round((slidesViewed / (leccionesTotales)) * 100);
+            } else {
+              currentProgress = Math.round((slidesViewed / (leccionesTotales + 1)) * 100);
+            };
             guardarProgreso(currentProgress);
           }
 
@@ -187,35 +194,40 @@
           });
 
           // Check if progresoLeccionVista equals maxValor
-          if (aproximarValor(progresoLeccionVista) === aproximarValor(maxValor)) {
-            fetch('http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba')
-              .then(response => response.json())
-              .then(data => {
-                const filteredResults = data.filter(result => result[1] == idPrueba_leccion && result[2] == idUsuario);
-                const perfectScore = filteredResults.some(result => result[4] >= 9);
-                
-                if (perfectScore) {
-                  currentProgress = 100;
-                  guardarProgreso(currentProgress);
-                }
+          if (idPrueba_leccion != null) {
+            if (aproximarValor(progresoLeccionVista) === aproximarValor(maxValor)) {
+              fetch('http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba')
+                .then(response => response.json())
+                .then(data => {
+                  const filteredResults = data.filter(result => result[1] == idPrueba_leccion && result[2] == idUsuario);
+                  const perfectScore = filteredResults.some(result => result[4] >= 9);
+                  
+                  if (perfectScore) {
+                    currentProgress = 100;
+                    guardarProgreso(currentProgress);
+                  }
 
-                updateResultsTable(filteredResults);
-              })
-              .catch(error => {
-                console.error('Error fetching data:', error);
-              });
+                  updateResultsTable(filteredResults);
+                })
+                .catch(error => {
+                  console.error('Error fetching data:', error);
+                });
+            } else {
+              // If not equal, just fetch and display the results
+              fetch('http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba')
+                .then(response => response.json())
+                .then(data => {
+                  const filteredResults = data.filter(result => result[1] == idPrueba_leccion && result[2] == idUsuario);
+                  updateResultsTable(filteredResults);
+                })
+                .catch(error => {
+                  console.error('Error fetching data:', error);
+                });
+            }
           } else {
-            // If not equal, just fetch and display the results
-            fetch('http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba')
-              .then(response => response.json())
-              .then(data => {
-                const filteredResults = data.filter(result => result[1] == idPrueba_leccion && result[2] == idUsuario);
-                updateResultsTable(filteredResults);
-              })
-              .catch(error => {
-                console.error('Error fetching data:', error);
-              });
+            document.getElementById("pruebaContainer").classList.add("d-none");
           }
+          
 
           function updateResultsTable(results) {
             const tableBody = document.querySelector('#resultsTable tbody');

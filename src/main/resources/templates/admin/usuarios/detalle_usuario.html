@@ -79,51 +79,54 @@
         </div>
       </div>
       <div class="mx-3">
-        <div class="row">
-          <div class="col-md-6">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item list-group-item-success">
-                <b>Nombres: </b><span th:text="${usuario.nombre}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>N° Carné: </b><span th:text="${usuario.carnet}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Contraseña: </b><span th:text="${usuario.contrasena}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Estado: </b><span th:text="${usuario.estado}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Grado: </b><span th:text="${usuario.gradoNombre}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Nivel Educativo: </b
-                ><span th:text="${usuario.nivelEducativoNombre}"></span>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item list-group-item-success">
-                <b>Apellidos: </b><span th:text="${usuario.apellido}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Correo: </b><span th:text="${usuario.correo}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Número de Teléfono: </b
-                ><span th:text="${usuario.numero}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Rol: </b><span th:text="${usuario.rolNombre}"></span>
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Sección: </b><span th:text="${usuario.seccionNombre}"></span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Nombres:</th>
+              <td><span th:text="${usuario.nombre}"></span></td>
+            </tr>
+            <tr>
+              <th>Apellidos:</th>
+              <td><span th:text="${usuario.apellido}"></span></td>
+            </tr>
+            <tr>
+              <th>N° Carné:</th>
+              <td><span th:text="${usuario.carnet}"></span></td>
+            </tr>
+            <tr>
+              <th>Correo:</th>
+              <td><span th:text="${usuario.correo}"></span></td>
+            </tr>
+            <tr>
+              <th>Contraseña:</th>
+              <td><span th:text="${usuario.contrasena}"></span></td>
+            </tr>
+            <tr>
+              <th>Número de Teléfono:</th>
+              <td><span th:text="${usuario.numero}"></span></td>
+            </tr>
+            <tr>
+              <th>Estado:</th>
+              <td><span th:text="${usuario.estado}"></span></td>
+            </tr>
+            <tr>
+              <th>Rol:</th>
+              <td><span th:text="${usuario.rolNombre}"></span></td>
+            </tr>
+            <tr>
+              <th>Grado:</th>
+              <td><span th:text="${usuario.gradoNombre}"></span></td>
+            </tr>
+            <tr>
+              <th>Sección:</th>
+              <td><span th:text="${usuario.seccionNombre}"></span></td>
+            </tr>
+            <tr>
+              <th>Nivel Educativo:</th>
+              <td><span th:text="${usuario.nivelEducativoNombre}"></span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
   </body>

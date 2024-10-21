@@ -249,45 +249,51 @@
                 // Iterar sobre los resultados y mostrarlos
                 data.forEach((usuario) => {
                   const resultHTML = `
-        <div class="row">
-          <div class="col-md-6">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item list-group-item-success">
-                <b>Nombres: </b>${usuario[2]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>N° Carné: </b>${usuario[1]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Estado: </b>${usuario[15]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Grado: </b>${usuario[8]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Nivel Educativo: </b>${usuario[12]}
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item list-group-item-success">
-                <b>Apellidos: </b>${usuario[3]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Correo: </b>${usuario[13]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Número de Teléfono: </b>${usuario[14]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Rol: </b>${usuario[6]}
-              </li>
-              <li class="list-group-item list-group-item-success">
-                <b>Sección: </b>${usuario[10]}
-              </li>
-            </ul>
-          </div>
+        <div class="mx-3">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th style="width: 30% !important;">Nombres:</th>
+                <td style="width: 70% !important;">${usuario[2]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Apellidos:</th>
+                <td style="width: 70% !important;">${usuario[3]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">N° Carné:</th>
+                <td style="width: 70% !important;">${usuario[1]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Correo:</th>
+                <td style="width: 70% !important;">${usuario[13]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Estado:</th>
+                <td style="width: 70% !important;">${usuario[15]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Número de Teléfono:</th>
+                <td style="width: 70% !important;">${usuario[14]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Grado:</th>
+                <td style="width: 70% !important;">${usuario[8]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Rol:</th>
+                <td style="width: 70% !important;">${usuario[6]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Nivel Educativo:</th>
+                <td style="width: 70% !important;">${usuario[12]}</td>
+              </tr>
+              <tr>
+                <th style="width: 30% !important;">Sección:</th>
+                <td style="width: 70% !important;">${usuario[10]}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <hr />
         `;
