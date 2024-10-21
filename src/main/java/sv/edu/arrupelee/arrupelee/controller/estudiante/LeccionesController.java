@@ -213,7 +213,10 @@ public class LeccionesController {
 
     // Esta ruta literalmente es para mostrar las lecciones
     @RequestMapping("/leccion/{id}/{progresoLeccion}")
-    public String mostrarLeccion(Model model, @PathVariable Long id, @PathVariable int progresoLeccion) {
+    public String mostrarLeccion(Model model, @PathVariable Long id, @PathVariable int progresoLeccion, @SessionAttribute("nivelEducativo") Long idNivelEducativo) {
+        // Obtener el objeto del Nivel Educativo correspondiente (Para luego mostrar el nombre de este)
+        NivelEducativo nivelEducativo = nivelEducativoRepository.findById(idNivelEducativo).orElse(null);
+        
         Lecciones leccion = leccionesRepository.findById(id).orElse(null);
 
         // Aquí separo de las comas las imagenes de la leccion
@@ -224,6 +227,9 @@ public class LeccionesController {
 
         // Mandar la leccion a la vista
         model.addAttribute("leccion", leccion);
+        
+        // Mandar el nombre del nivel educativo
+        model.addAttribute("nivelEducativoNombre", nivelEducativo.getNombre());
         
         // Mandar el progreso de la leccion a la vista
         model.addAttribute("progresoLeccionVista", progresoLeccion);

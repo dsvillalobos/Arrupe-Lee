@@ -67,8 +67,9 @@
       </nav>
     </header>
     <main class="container mt-4">
-      <div class="text-center mb-3 text-light">
-        <h3 class="fs-2 rowdies-regular mb-3" th:text="${leccion.nombre}"></h3>
+      <div class="text-center mb-4 text-light">
+        <h3 class="fs-2 rowdies-regular mb-2" th:text="${leccion.nombre}"></h3>
+        <div class="small">Nivel Educativo: <span th:text="${nivelEducativoNombre}"></span></div>
       </div>
       
       <div id="leccionData" th:data-leccion-id="${leccion.id}"></div>
@@ -106,7 +107,7 @@
       </div>
 
       <!-- Para dirigirse a una prueba -->
-       <h5 class="text-center mb-3 text-light">Prueba de Conocimientos</h5>
+       <h5 class="text-center mb-3 text-light rowdies-regular">Prueba de Conocimientos</h5>
 
        <div class="my-3 d-grid gap-2">
         <a class="btn btn-primary btn-sm" th:href="@{'/prueba/' + ${leccion.id}}">Realizar Prueba</a>
