@@ -130,9 +130,9 @@
               codeRow.innerHTML = `<th style="width: 25% !important">N° Carné:</th><td style="width: 75% !important">${lastResult[3]}</td>`;
 
               const scoreRow = document.createElement("tr");
-              scoreRow.innerHTML = `<th style="width: 25% !important">Puntaje:</th><td style="width: 75% !important">Su puntuación total es de: <b>${lastResult[4].toFixed(
-                1
-              )}</b></td>`;
+              scoreRow.innerHTML = `<th style="width: 25% !important">Puntaje:</th><td style="width: 75% !important">Su puntuación total es de: <b>${
+                lastResult[4].toFixed(0) * 10
+              }/100</b></td>`;
 
               const dateRow = document.createElement("tr");
               dateRow.innerHTML = `<th style="width: 25% !important">Fecha de Realización:</th><td style="width: 75% !important">${new Date(
