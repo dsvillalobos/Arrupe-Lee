@@ -69,36 +69,91 @@
     </header>
     <main class="container mt-4">
       <div class="text-center mb-3 text-light">
-        <h3 class="fs-2 rowdies-regular mb-3">Secciones</h3>
-        <div class="fst-italic fs-6">
-          Maneja las secciones que estarán disponibles en Planeta Arrupe.
+        <h3 class="fs-2 rowdies-regular mb-3">Editar Lección</h3>
+      </div>
+      <form
+        class="mx-3 text-light"
+        action="/guardar-edicion-leccion-admin"
+        autocomplete="off"
+      >
+        <div class="mb-3">
+          <input
+            type="hidden"
+            name="idLeccion"
+            id="idLeccion"
+            th:value="${leccion.id}"
+          />
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            placeholder="Agrega un nombre"
+            class="form-control"
+            th:value="${leccion.nombre}"
+            required
+            maxlength="255"
+          />
         </div>
-      </div>
-      <div class="d-grid gap-2 mb-3 mx-5">
-        <a class="btn btn-primary text-dark btn-sm" href="/agregar-seccion"
-          >Agregar Sección</a
-        >
-      </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th style="width: 80% !important">Nombre</th>
-            <th class="text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="seccion : ${secciones}">
-            <td style="width: 80% !important" th:text="${seccion.nombre}"></td>
-            <td class="d-grid gap-2">
-              <a
-                class="btn btn-secondary btn-sm"
-                th:href="@{'/editar-seccion/' + ${seccion.id}}"
-                >Editar</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="mb-3">
+          <label for="contenido" class="form-label">Contenido:</label>
+          <input
+            type="text"
+            name="contenido"
+            id="contenido"
+            placeholder="Agrega un contenido"
+            class="form-control"
+            th:value="${leccion.contenido}"
+            required
+          />
+        </div>
+        <div class="mb-3 ms-5">
+          <label for="nivelLiterario" class="form-label"
+            >Nivel Literario:</label
+          >
+          <select
+            name="nivelLiterario"
+            id="nivelLiterario"
+            class="form-control"
+          >
+            <option value="LITERAL">LITERAL</option>
+            <option value="INFERENCIAL">INFERENCIAL</option>
+            <option value="CRITICO">CRITICO</option>
+          </select>
+        </div>
+        <div class="mb-3 ms-5">
+          <label for="idNivelEducativo" class="form-label"
+            >Nivel Educativo:</label
+          >
+          <select
+            name="idNivelEducativo"
+            id="idNivelEducativo"
+            class="form-control"
+            required
+          >
+            <option
+              th:each="nivel : ${niveles}"
+              th:value="${nivel.id}"
+              th:text="${nivel.nombre}"
+            ></option>
+            >
+          </select>
+        </div>
+        <div class="mb-3 ms-5">
+          <label for="estado" class="form-label">Estado:</label>
+          <select name="estado" id="estado" class="form-control">
+            <option value="HABILITADO">HABILITADO</option>
+            <option value="DESHABILITADO">DESHABILITADO</option>
+          </select>
+        </div>
+        <div class="mb-3 d-grid gap-2">
+          <button class="btn btn-primary text-dark btn-sm">Guardar</button>
+        </div>
+        <hr />
+        <div class="mb-3">
+          <a class="text-light" href="/lecciones">Regresar</a>
+        </div>
+      </form>
     </main>
   </body>
 </html>

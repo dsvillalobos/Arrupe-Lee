@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planeta Arrupe</title>
+    <link rel="shortcut icon" href="/images/icono.png" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -119,10 +120,9 @@
           <table class="table" id="resultsTable">
             <thead>
               <tr>
-                <th>Intento</th>
-                <th>Fecha de Realización</th>
-                <th>Puntuación</th>
-                <th>Detalles</th>
+                <th class="text-center">Intento</th>
+                <th class="text-center">Fecha de Realización</th>
+                <th class="text-center">Puntuación</th>
               </tr>
             </thead>
             <tbody>
@@ -147,7 +147,6 @@
           const totalSlides = document.querySelectorAll('.carousel-item').length;
           const leccionId = document.getElementById('leccionData').dataset.leccionId;
 
-          // New variables for progress calculation
           const leccionesTotales = totalSlides;
           const maxValor = (leccionesTotales / (leccionesTotales + 1)) * 100;
           let currentProgress = 0;
@@ -193,14 +192,13 @@
             });
           });
 
-          // Check if progresoLeccionVista equals maxValor
           if (idPrueba_leccion != null) {
             if (aproximarValor(progresoLeccionVista) === aproximarValor(maxValor)) {
               fetch('http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba')
                 .then(response => response.json())
                 .then(data => {
                   const filteredResults = data.filter(result => result[1] == idPrueba_leccion && result[2] == idUsuario);
-                  const perfectScore = filteredResults.some(result => result[4] >= 9);
+                  const perfectScore = filteredResults.some(result => result[4] >= 90);
                   
                   if (perfectScore) {
                     currentProgress = 100;
@@ -213,7 +211,6 @@
                   console.error('Error fetching data:', error);
                 });
             } else {
-              // If not equal, just fetch and display the results
               fetch('http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba')
                 .then(response => response.json())
                 .then(data => {
@@ -236,10 +233,9 @@
             results.forEach((result, index) => {
               const row = document.createElement('tr');
               row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${result[5] ? new Date(result[5]).toLocaleString() : 'N/A'}</td>
-                <td>${result[4]}</td>
-                <td><a href='' class='btn btn-sm btn-primary'>Detalles</a></td>
+                <td class='text-center'>${index + 1}</td>
+                <td class='text-center'>${result[5] ? new Date(result[5]).toLocaleString() : 'N/A'}</td>
+                <td class='text-center'>${result[4]}/100</td>
               `;
               tableBody.appendChild(row);
             });

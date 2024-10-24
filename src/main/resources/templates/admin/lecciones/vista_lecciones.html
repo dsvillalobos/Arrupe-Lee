@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planeta Arrupe</title>
+    <link rel="shortcut icon" href="/images/icono.png" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -81,7 +82,6 @@
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Nombre</th>
             <th>Nivel Literario</th>
             <th>Nivel Educativo</th>
@@ -91,7 +91,6 @@
         </thead>
         <tbody>
           <tr th:each="leccion : ${lecciones}">
-            <td th:text="${leccion.id}"></td>
             <td th:text="${leccion.nombre}"></td>
             <td th:text="${leccion.nivelLiterario}"></td>
             <td th:text="${leccion.nombreNivelEducativo}"></td>
@@ -99,7 +98,12 @@
             <td class="d-grid gap-2">
               <a
                 class="btn btn-secondary btn-sm"
-                th:href="@{'/editar-nivel/' + ${leccion.id}}"
+                th:href="@{'/estado-leccion-admin/' + ${leccion.id}}"
+                >Cambiar Estado</a
+              >
+              <a
+                class="btn btn-secondary btn-sm"
+                th:href="@{'/editar-leccion-admin/' + ${leccion.id}}"
                 >Editar</a
               >
             </td>

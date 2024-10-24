@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planeta Arrupe</title>
+    <link rel="shortcut icon" href="/images/icono.png" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -328,7 +329,6 @@
 
             console.log("Última Prueba ID:", idPrueba);
 
-            // Function to post each pregunta sequentially
             for (let i = 1; i <= preguntaCounter; i++) {
               const nombrePregunta = document.getElementById(
                 `pregunta${i}`
@@ -357,7 +357,6 @@
 
               console.log(`Pregunta N°${i} agregada exitosamente`);
 
-              // GET preguntas and get the last added pregunta
               const preguntasResponse = await fetch(
                 "http://localhost:8085/arrupe/sv/arrupe/preguntas"
               );
@@ -367,12 +366,10 @@
 
               console.log(`Última Pregunta ID: ${idPregunta}`);
 
-              // Get the correct answer for this question
               const correctAnswer = document.getElementById(
                 `respuestaCorrectaPregunta${i}`
               ).value;
 
-              // Add responses for each question
               for (let j = 1; j <= 4; j++) {
                 const respuesta = document.getElementById(
                   `respuestaPregunta${i}_${j}`

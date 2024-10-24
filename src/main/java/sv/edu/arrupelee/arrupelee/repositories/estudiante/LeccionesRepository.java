@@ -18,4 +18,5 @@ public interface LeccionesRepository extends JpaRepository <Lecciones, Long> {
     
     @Query("SELECT l FROM Lecciones l WHERE l.estado = :estado AND l.nivelLiterario = :nivelLiterario AND l.idNivel = :idNivel")
     List <Lecciones> findByEstadoAndNivelLiterarioAndIdNivel(@Param("estado") String estado, @Param("nivelLiterario") String nivelLiterario, @Param("idNivel") Long idNivel);
+    
 }

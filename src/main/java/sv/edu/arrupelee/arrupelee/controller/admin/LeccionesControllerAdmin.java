@@ -70,4 +70,26 @@ public class LeccionesControllerAdmin {
         return "redirect:/lecciones";
     }
     
+    @RequestMapping("/editar-leccion-admin/{idLeccion}")
+    public String editarLeccion(Model model, @PathVariable Long idLeccion) {
+        Lecciones leccion = leccionesRepository.findById(idLeccion).orElse(null);
+        model.addAttribute("leccion", leccion);
+        model.addAttribute("niveles", nivelEducativoRepository.findAll());
+        
+        return "admin/lecciones/editar_leccion";
+    }
+    
+    @RequestMapping("/guardar-edicion-leccion-admin")
+    public String guardarEdicionLeccionAdmin(Model model, @RequestParam Long idLeccion, @RequestParam String nombre, @RequestParam String nivelLiterario, @RequestParam String contenido, @RequestParam String estado, @RequestParam Long idNivelEducativo) {
+        Lecciones leccion  = leccionesRepository.findById(idLeccion).orElse(null);
+        leccion.setNombre(nombre);
+        leccion.setEstado(estado);
+        leccion.setContenido(contenido);
+        leccion.setNivelLiterario(nivelLiterario);
+        leccion.setIdNivel(idNivelEducativo);
+        leccionesRepository.save(leccion);
+        
+        return "redirect:/lecciones";
+    }
+    
 }

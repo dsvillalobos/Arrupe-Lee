@@ -308,4 +308,12 @@ public class LeccionesController {
         return "estudiante/pruebas/resultado_prueba";
     }
     
+    // Para dirigirse a la bitacora de vuelo
+    @RequestMapping("/bitacora-vuelo")
+    public String bitacoraVuelo(Model model, @SessionAttribute("ID") Long idUsuario) {
+        model.addAttribute("idUsuarioBitacora", idUsuario);
+        
+        return "estudiante/bitacora_vuelo";
+    }
+    
 }

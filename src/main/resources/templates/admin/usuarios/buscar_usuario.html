@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planeta Arrupe</title>
+    <link rel="shortcut icon" href="/images/icono.png" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -196,7 +197,6 @@
         .addEventListener("submit", function (event) {
           event.preventDefault();
 
-          // Get form values
           const nombre = document.getElementById("nombre").value || null;
           const apellido = document.getElementById("apellido").value || null;
           const carnet = document.getElementById("carnet").value || null;
@@ -207,7 +207,6 @@
           const idNivelEducativo =
             document.getElementById("idNivelEducativo").value || null;
 
-          // Construct the request body
           const body = {
             carnet: carnet,
             nombre: nombre,
@@ -219,7 +218,6 @@
             estado: estado,
           };
 
-          // Make the POST request
           fetch("http://localhost:8085/arrupe/sv/arrupe/usuarios/buscar", {
             method: "POST",
             headers: {

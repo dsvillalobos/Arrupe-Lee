@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planeta Arrupe</title>
+    <link rel="shortcut icon" href="/images/icono.png" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -111,42 +112,37 @@
       /*]]>*/
     </script>
     <script>
-      // Function to fetch and display the result
       function fetchAndDisplayResult() {
         fetch("http://localhost:8085/arrupe/sv/arrupe/resultadosPrueba")
           .then((response) => response.json())
           .then((data) => {
-            // Filter results based on idPrueba and idUsuario
             const matchingResults = data.filter(
               (row) => row[1] === idPrueba && row[2] === idUsuario
             );
 
-            // Get the last matching result
             const lastResult = matchingResults[matchingResults.length - 1];
 
             if (lastResult) {
-              // Create new table rows for code and score
               const codeRow = document.createElement("tr");
               codeRow.innerHTML = `<th style="width: 25% !important">N° Carné:</th><td style="width: 75% !important">${lastResult[3]}</td>`;
 
               const scoreRow = document.createElement("tr");
-              scoreRow.innerHTML = `<th style="width: 25% !important">Puntaje:</th><td style="width: 75% !important">Su puntuación total es de: <b>${
-                lastResult[4].toFixed(0) * 10
-              }/100</b></td>`;
+              scoreRow.innerHTML = `<th style="width: 25% !important">Puntaje:</th><td style="width: 75% !important">Su puntuación total es de: <b>${lastResult[4].toFixed(
+                0
+              )}/100</b></td>`;
 
               const dateRow = document.createElement("tr");
               dateRow.innerHTML = `<th style="width: 25% !important">Fecha de Realización:</th><td style="width: 75% !important">${new Date(
                 lastResult[5]
               ).toLocaleString()}</td>`;
 
-              // Append new rows to the table
               const tableBody = document.querySelector("table tbody");
               tableBody.appendChild(codeRow);
               tableBody.appendChild(scoreRow);
               tableBody.appendChild(dateRow);
 
               // Revisar el puntaje
-              if (lastResult[4].toFixed(1) >= 9) {
+              if (lastResult[4].toFixed(1) >= 90) {
                 document.getElementById("resultadoContainer").innerHTML =
                   "¡Felicidades! Has aprobado el ejercicio.";
               } else {
@@ -160,7 +156,6 @@
           .catch((error) => console.error("Error:", error));
       }
 
-      // Call the function when the DOM is fully loaded
       document.addEventListener("DOMContentLoaded", fetchAndDisplayResult);
 
       function regresar() {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planeta Arrupe</title>
+    <link rel="shortcut icon" href="/images/icono.png" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -25,18 +26,15 @@
     <link rel="stylesheet" href="/stylesheets/styles.css" />
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Fetch the data from the API
         fetch("http://localhost:8085/arrupe/sv/arrupe/prueba")
           .then((response) => response.json())
           .then((data) => {
-            // Select the idLeccion dropdown
             const selectElement = document.getElementById("idPrueba");
 
-            // Loop through the array of arrays and create options
             data.forEach((prueba) => {
               const option = document.createElement("option");
               option.value = prueba[0]; // idPrueba
-              option.textContent = prueba[1]; // Title of the prueba
+              option.textContent = prueba[1]; // Titulo de la prueba
               selectElement.appendChild(option);
             });
           })
